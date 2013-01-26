@@ -17,5 +17,6 @@ describe "Statics" do
   		visit '/static/home'
   		page.should have_selector('title',:text=>"Home | Trackr")
   	end
+  end
 end
  
