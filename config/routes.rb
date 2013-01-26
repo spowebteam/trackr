@@ -1,7 +1,11 @@
 Trackr::Application.routes.draw do
-  get "static/about"
-  get "static/home"
-  get "static/contact"
+  root to: 'static#home'
+
+  match '/about',     to: 'static#about'
+  match '/contact',   to: 'static#contact'
+  match '/signup',    to: 'static#signup'
+  match '/signin',    to: 'static#signin'
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
