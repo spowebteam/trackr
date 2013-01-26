@@ -7,5 +7,9 @@ describe "Statics" do
       visit '/static/about'
       page.should have_content ('About')
     end
+    it "should have proper title 'About | Trackr'" do
+    	visit '/static/about'
+    	page.should have_selector('title',:text=>"About | Trackr")
+    end
   end
 end
