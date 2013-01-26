@@ -1,6 +1,7 @@
 Trackr::Application.routes.draw do
   get "static/about"
   get "static/home"
+  get "static/contact"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
