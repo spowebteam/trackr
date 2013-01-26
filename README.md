@@ -24,6 +24,51 @@ Clearly a better solution was needed. Trackr was thus born.
         + 2 - Edit subject to Authorization
         + 4 - Edit without Authorization
         + 8 - Authorize edits
-  
 
-`Company` for the companies tracked
+- `Phone Number` - Stores user phone number
+- `Identifier` - Used to store unique identifier for the user, which is roll number in our case. 
+
+- HasMany:`tags`- Tags are generalizations for making groups of people and users 
+
+
+`Company` for the companies tracked which has 
+- `Name`
+- `Link`
+- `Phone number`
+- `Location`
+- `Address`
+- `Point of Contact` - User_id of the person assigned to the company
+- `Managed by` - User_id of the person managing it. 
+- `Status` - Which stage it has reached, identified by code numbers
+- `Summary`- The total summary of the company till now
+
+- HasMany: `tags`
+- HasMany: `Company_log`
+- HasMany: `Company_contacts`
+
+`Company_log` - Contains the content of the company log interaction 
+- `Contacted by`
+- `Company-contact`
+- `Time Stamp`
+- `Tone` - Very positive to very negative
+- `Content` - What was the conversation that happened
+
+`Company_contact` - Has the details of the company persons 
+- `Name` 
+- `Designation`
+- `Landline`
+- `Mobile phone`
+- `Email Id`
+- `Address`
+
+`Tags` is a special kind of model I still haven't decided the method to implement since it is used BOTH for companies and users and we need the function to find the users who have the same tags as companies
+- `Tag Name`
+- `Tag Description`
+- `company_id`
+- `user_id`
+- `Company/User`
+
+
+
+
+
