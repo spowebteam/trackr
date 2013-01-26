@@ -5,27 +5,13 @@
     <%= stylesheet_link_tag    "application", media: "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/htmljs"></script>
-    <![endif]-->
+    <%= render 'layouts/shim' %>
 </head>
 <body>
-<header class="navbar navbar-fixed-top navbar-inverse">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-          
-            <nav>
-                <a class="brand" href="#">Trackr</a>
-                <ul class="nav pull-right">
-                    <li><%= link_to "About","#" %></li>
-                    <li><%= link_to "Logged in as Admin","#" %></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</header>
+<%= render 'layouts/header' %>
 <div class="container">
     <%= yield %>
 </div>
+<%= render 'layouts/footer' %>
 </body>
 </html>
