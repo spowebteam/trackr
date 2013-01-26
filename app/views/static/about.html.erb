@@ -32,4 +32,59 @@
     + 8 - Authorize edits
 </code></pre>
 
-<p><code>Company</code> for the companies tracked</p>
+<ul>
+<li><code>Phone Number</code> - Stores user phone number</li>
+<li><p><code>Identifier</code> - Used to store unique identifier for the user, which is roll number in our case. </p></li>
+<li><p>HasMany:<code>tags</code>- Tags are generalizations for making groups of people and users </p></li>
+</ul>
+
+<p><code>Company</code> for the companies tracked which has </p>
+
+<ul>
+<li><code>Name</code></li>
+<li><code>Link</code></li>
+<li><code>Phone number</code></li>
+<li><code>Location</code></li>
+<li><code>Address</code></li>
+<li><code>Point of Contact</code> - User_id of the person assigned to the company</li>
+<li><code>Managed by</code> - User_id of the person managing it. </li>
+<li><code>Status</code> - Which stage it has reached, identified by code numbers</li>
+<li><code>Summary</code>- The total summary of the company till now</li>
+</ul>
+
+<ul>
+<li>HasMany: <code>tags</code></li>
+<li>HasMany: <code>Company_log</code></li>
+<li>HasMany: <code>Company_contacts</code></li>
+</ul>
+
+<p><code>Company_log</code> - Contains the content of the company log interaction </p>
+
+<ul>
+<li><code>Contacted by</code></li>
+<li><code>Company-contact</code></li>
+<li><code>Time Stamp</code></li>
+<li><code>Tone</code> - Very positive to very negative</li>
+<li><code>Content</code> - What was the conversation that happened</li>
+</ul>
+
+<p><code>Company_contact</code> - Has the details of the company persons </p>
+
+<ul>
+<li><code>Name</code> </li>
+<li><code>Designation</code></li>
+<li><code>Landline</code></li>
+<li><code>Mobile phone</code></li>
+<li><code>Email Id</code></li>
+<li><code>Address</code></li>
+</ul>
+
+<p><code>Tags</code> is a special kind of model I still haven't decided the method to implement since it is used BOTH for companies and users and we need the function to find the users who have the same tags as companies</p>
+
+<ul>
+<li><code>Tag Name</code></li>
+<li><code>Tag Description</code></li>
+<li><code>company_id</code></li>
+<li><code>user_id</code></li>
+<li><code>Company/User</code></li>
+</ul>
