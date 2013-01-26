@@ -12,4 +12,10 @@ describe "Statics" do
     	page.should have_selector('title',:text=>"About | Trackr")
     end
   end
+  describe "Home page" do
+  	it "should have the content 'Home'" do
+  		visit '/static/home'
+  		page.should have_selector('title',:text=>"Home | Trackr")
+  	end
 end
+ 
