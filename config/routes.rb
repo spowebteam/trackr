@@ -1,11 +1,10 @@
 Trackr::Application.routes.draw do
-  get "users/new"
-
+  
   root to: 'static#home'
 
   match '/about',     to: 'static#about'
   match '/contact',   to: 'static#contact'
-  match '/signup',    to: 'static#signup'
+  match '/signup',    to: 'users#new'
   match '/signin',    to: 'static#signin'
   
 

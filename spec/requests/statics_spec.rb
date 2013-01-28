@@ -31,18 +31,6 @@ describe "Statics" do
   	end
   end
 
-  describe "Signin page" do
-  	it "should have the corret title" do
-  		visit signin_path
-  		page.should have_selector('title',:text=>"Signin | Trackr")
-  	end
-  end
-
-  describe "Signup page" do
-  	it "should have the corret title" do
-  		visit signup_path
-  		page.should have_selector('title',:text=>"Signup | Trackr")
-  	end
-  end
+  
 end
  
