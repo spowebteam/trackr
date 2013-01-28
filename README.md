@@ -15,6 +15,7 @@ Clearly a better solution was needed. Trackr was thus born.
 
 `User` are the user that will be allowed access to the site contains
 - `Username/Password/Salt` in typical RoR fashion
+- `Name` 
 - `Email` currently restricted to @iitk.ac.in
 - `Userlevel` - A number with 0 being admin and in general lower number indicates higher authrority. 
 
