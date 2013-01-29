@@ -36,33 +36,74 @@ describe User do
   end
 
   describe "when name is really long" do
-  	before {@user.name = "a" *101}
-  	it {should_not be_valid }
+    before {@user.name = "a" *101}
+    it {should_not be_valid }
   end
 
   describe "when name is too short" do
-  	before {@user.name = "a"}
-  	it {should_not be_valid}
+    before {@user.name = "a"}
+    it {should_not be_valid}
   end
 
   describe "when email is invalid" do
-  	it "should be invalid" do
-  		addresses=%w[user@foo,com user_at_foo.org example.user@foo. foo@bar_baz.com foo@bar+baz.com]
-  		addresses.each do |invalid_address|
-  			@user.email= invalid_address
-  			@user.should_not be_valid
-  		end
-  	end
+    it "should be invalid" do
+        addresses=%w[user@foo,com user_at_foo.org example.user@foo. foo@bar_baz.com foo@bar+baz.com]
+        addresses.each do |invalidAddress|
+            @user.email= invalidAddress
+            @user.should_not be_valid
+        end
+    end
   end
 
   describe "when email format is valid" do
     it "should be valid" do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn a@9gag.eu some_us.er+df@ft.her-df.in]
-      addresses.each do |valid_address|
-        @user.email = valid_address
+      addresses.each do |validAddress|
+        @user.email = validAddress
         @user.should be_valid
       end      
     end
   end
+
+  describe "when email is not unique" do
+    before do
+        userSameEmail=@user.dup
+        userSameEmail.identifier="110022"
+        userSameEmail.save
+    end
+
+    it {should_not be_valid}
+  end
+
+  describe "when identifier is not unique" do
+    before do
+        userSameEmail=@user.dup
+        userSameEmail.email="manyu@cse.iitk.ac.in"
+        userSameEmail.save
+    end
+
+    it {should_not be_valid}
+  end
+
+  describe "when phone number is valid" do
+    it "should be valid" do
+        phoneNumbers=["","+91 1234","(808) 23 234-23","+1 (234) 23-234-234"]
+        phoneNumbers.each do |validNumber|
+            @user.phone = validNumber
+            @user.should be_valid
+        end 
+    end
+  end
+
+  describe "when phone number is invalid" do
+    it "should be invalid" do
+        phoneNumbers=["some","+91 234 some","/324"]
+        phoneNumbers.each do |invalidNumber|
+            @user.phone=invalidNumber
+            @user.should_not be_valid
+        end
+    end
+  end
+
 
 end
