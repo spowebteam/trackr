@@ -17,7 +17,7 @@ require 'spec_helper'
 describe User do
 
   before do
-    @user = User.new(name: "Example User", email: "user@example.com",level: 0,phone:"+918960436693",identifier: "11111002")
+    @user = User.new(name: "Example User", email: "user@example.com",level: 0,phone:"+918960436693",identifier: "11111002", password:"somerandompieceofstring",password_confirmation:"somerandompieceofstring")
   end
 
   subject { @user }
@@ -36,6 +36,21 @@ describe User do
   describe "when name is not present" do
     before { @user.name = " " }
     it { should_not be_valid }
+  end
+
+  describe "when password is blank" do
+    before{@user.password = @user.password_confirmation = " "}
+    it {should_not be_valid}
+  end
+
+  describe "when password and confirmation don't match" do
+    before{@user.password_confirmation="kjasjdfh"}
+    it {should_not be_valid}
+  end
+
+  describe "when password confirmation is nil" do
+    before {@user.password_confirmation=nil}
+    it{should_not be_valid}
   end
 
   describe "when name is really long" do
@@ -107,6 +122,24 @@ describe User do
         end
     end
   end
+
+  describe "return value of authenticate method" do
+    before{@user.save}
+    let(:found_user) {User.find_by_email(@user.email)}
+    
+    describe "with valid password" do
+      it {should==found_user.authenticate(@user.password)}
+    end
+
+    describe "with invalid password" do
+      let(:user_with_invalid_password) {found_user.authenticate("invalid")}
+
+      it {should_not ==user_with_invalid_password }
+      specify {user_with_invalid_password.should be_false}
+    end
+
+  end
+
 
 
 end
