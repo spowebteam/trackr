@@ -27,6 +27,9 @@ describe User do
   it { should respond_to(:phone) }
   it { should respond_to(:level) }
   it { should respond_to(:identifier) }
+  it { should respond_to(:password_digest)}
+  it { should respond_to(:password)}
+  it { should respond_to(:password_confirmation)}
 
   it { should be_valid }
 
