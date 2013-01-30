@@ -1,5 +1,6 @@
 Trackr::Application.routes.draw do
-  
+  resources :users
+
   root to: 'static#home'
 
   match '/about',     to: 'static#about'

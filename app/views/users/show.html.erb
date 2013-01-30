@@ -1,0 +1,7 @@
+<% provide(:title,@user.name) %>
+<h1><%=@user.name %>  <small><%= @user.identifier %></small></h1>
+<address>
+	<strong><%=@user.email %></strong><br/>
+	<%= @user.phone %><br />
+
+</address>
