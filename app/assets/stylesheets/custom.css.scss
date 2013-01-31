@@ -23,3 +23,17 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+ 
+}
+
+input {
+  height: auto !important;
+}
