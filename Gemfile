@@ -4,7 +4,9 @@ gem 'rails', '3.2.11'
 gem 'bootstrap-sass', '2.1'
 gem 'bcrypt-ruby', '3.0.1'
 
-gem 'mysql2'
+group :production do
+  gem 'pg', '0.12.2'
+end
 
 
 group :development, :test do
