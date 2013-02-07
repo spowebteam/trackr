@@ -67,5 +67,9 @@ Trackr::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
   # 
+  match "/500", to:'static#500'
+  match "/422", to:'static#422'
   match "/404", to:'static#404'
+  
+
 end
