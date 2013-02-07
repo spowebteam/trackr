@@ -27,7 +27,7 @@ describe "Authentication" do
       before do
         fill_in "Email",    with: user.email
         fill_in "Password", with: user.password
-        click_button "Sign in"
+        click_button "Sign In"
       end
 
       it { should have_selector('title', text: user.name) }
