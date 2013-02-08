@@ -24,11 +24,8 @@ describe "Authentication" do
 
     describe "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
-      before do
-        fill_in "Email",    with: user.email
-        fill_in "Password", with: user.password
-        click_button "Sign In"
-      end
+      before { sign_in user
+}      
 
       it { should have_selector('title', text: user.name) }
       it { should have_link('Profile',  href: user_path(user)) }
@@ -48,7 +45,7 @@ describe "Authentication" do
 
         describe "visiting the edit page" do
           before { visit edit_user_path(user) }
-          it { should have_selector('title', text: 'Sign in') }
+          it { should have_selector('title', text: 'Sign In') }
         end
 
         describe "submitting to the update action" do
