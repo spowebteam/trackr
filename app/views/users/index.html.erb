@@ -1,0 +1,30 @@
+<% provide(:title,"Users") %>
+<h1>User List</h1>
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr>
+      <td>Sl No.</td>
+      <td>Name</td>
+      <td>Email</td>
+      <td>Phone</td>
+      <td>Identifier</td>
+      <td>Level</td>
+    <tr>
+  <thead>
+  <tbody>
+    <% counter = 1 %>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= counter %></td>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.phone %></td>
+      <td><%= user.identifier %></td>
+      <td><%= user.level %></td>
+      <td><%= current_user.name %></td>
+      
+      <% counter+=1 %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -4,6 +4,24 @@ describe "User pages" do
 
   subject { page }
 
+  describe "index" do
+    before do 
+      sign_in FactoryGirl.create(:user)
+      FactoryGirl.create(:user, name: "Bob", email: "bob@example.com",identifier:"vxcyo8")
+      FactoryGirl.create(:user, name: "Ben", email: "ben@example.com",identifier:"jhsdaf8")
+      visit users_path
+    end 
+
+    it { should have_selector('title', text:'Users')}
+    it {should have_selector('h1',text:'Users')}
+
+    it "should list each user" do
+      User.all.each do |user|
+        page.should have_selector('td',text: user.name)
+      end
+    end
+  end
+
   describe "signup" do
     before { visit signup_path }
 
@@ -34,7 +52,10 @@ describe "User pages" do
 
   describe "profile page" do
     let(:user) {FactoryGirl.create(:user)}
-    before { visit user_path(user)}
+    before do
+      sign_in user 
+      visit user_path(user)
+    end
 
     it {should have_selector('h1', text: user.name)}
     it {should have_selector('title', text: user.name)}
