@@ -13,7 +13,7 @@ describe "User pages" do
     end 
 
     it { should have_selector('title', text:'Users')}
-    it {should have_selector('h1',text:'Users')}
+    it {should have_selector('h1',text:'User List')}
 
     it "should list each user" do
       User.all.each do |user|
