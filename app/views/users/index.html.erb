@@ -1,5 +1,8 @@
 <% provide(:title,"Users") %>
 <h1>User List</h1>
+<div class="pagination-centered">
+<%= will_paginate %>
+</div>
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>
@@ -9,6 +12,10 @@
       <td>Phone</td>
       <td>Identifier</td>
       <td>Level</td>
+      <% if admin? %>
+      <td>More</td>
+      <% end %>  
+
     <tr>
   <thead>
   <tbody>
@@ -20,11 +27,15 @@
       <td><%= user.email %></td>
       <td><%= user.phone %></td>
       <td><%= user.identifier %></td>
-      <td><%= user.level %></td>
-      <td><%= current_user.name %></td>
-      
+      <td><%= user.role %></td>
+      <% if admin? %>
+      <td><%= render 'users/user_edit_button', user: user %></td>
+      <% end %>
       <% counter+=1 %>
     </tr>
     <% end %>
   </tbody>
 </table>
+<div class="pagination-centered">
+<%= will_paginate %>
+</div>
