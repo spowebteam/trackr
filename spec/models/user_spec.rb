@@ -17,7 +17,7 @@ require 'spec_helper'
 describe User do
 
   before do
-    @user = User.new(name: "Example User", email: "user@example.com",level: 0,phone:"+918960436693",identifier: "11111002", password:"somerandompieceofstring",password_confirmation:"somerandompieceofstring")
+    @user = User.new(name: "Example User", email: "user@example.com",phone:"+918960436693",identifier: "11111002", password:"somerandompieceofstring",password_confirmation:"somerandompieceofstring")
   end
 
   subject { @user }
@@ -34,6 +34,7 @@ describe User do
   it { should respond_to(:authenticate)}
 
   it { should be_valid }
+  
 
   describe "when name is not present" do
     before { @user.name = " " }
@@ -145,6 +146,23 @@ describe User do
   describe "remember token" do
       before {@user.save}
       its(:remember_token) {should_not be_blank}
+  end
+
+  describe "with admin set to higher value" do
+    before do
+      @user.save
+    end
+
+    specify {not @user.admin?}
+    end
+
+  describe "with admin set to true" do
+    before do
+      @user.level=0
+      @user.save
+    end
+
+    specify{ @user.admin?}
   end
 
 

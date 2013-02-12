@@ -12,7 +12,7 @@
       <td>Phone</td>
       <td>Identifier</td>
       <td>Level</td>
-      <% if admin? %>
+      <% if current_user.admin? %>
       <td>More</td>
       <% end %>  
 
@@ -28,7 +28,7 @@
       <td><%= user.phone %></td>
       <td><%= user.identifier %></td>
       <td><%= user.role %></td>
-      <% if admin? %>
+      <% if current_user.admin? %>
       <td><%= render 'users/user_edit_button', user: user %></td>
       <% end %>
       <% counter+=1 %>

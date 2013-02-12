@@ -13,7 +13,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :identifier, :level, :name, :phone, :password, :password_confirmation
+  attr_accessible :email, :identifier, :name, :phone, :password, :password_confirmation
   has_secure_password
 
   before_save {|user| user.email = email.downcase}
@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   validates :password, presence:true , length: {minimum:6 }
   validates :password_confirmation, presence: true
 
-  def role 
+   def role 
     if self.level ==0
       return "superadmin"
     elsif self.level==1
@@ -43,6 +43,19 @@ class User < ActiveRecord::Base
     end
   end
 
+  def superadmin?
+    if self.level==0
+      true
+    end
+  end
+
+  def admin?
+    if self.level<2
+      return true
+    end
+  end
+
+
   private
 
     def create_remember_token
@@ -52,5 +65,7 @@ class User < ActiveRecord::Base
     def set_deactivated
       self.level=127
     end
+
+   
 
 end

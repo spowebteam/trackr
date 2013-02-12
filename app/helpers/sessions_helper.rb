@@ -34,12 +34,6 @@ module SessionsHelper
 		session[:return_to]=request.url
 	end
 
-	def superadmin?
-		signed_in? && current_user.level == 0
-	end
-
-	def admin?
-		signed_in? && current_user.level <= 1
-	end
+	
 
 end

@@ -70,10 +70,9 @@ describe "Authentication" do
 
         describe "visiting the user index" do
           before do
-            sign_in user 
             visit users_path
           end
-          it {should have_selector('title',text:'Sign in')}
+          it {should have_selector('title',text:'Sign In')}
         end
       end
     end
