@@ -1,11 +1,13 @@
-FactoryGirl.define do 
-	factory :user do
-		name "Abhimanyu M A"
-		email "abhi+trackradmin@manyu.in"
-		phone "+91 999999999"
-		level "99"
-		identifier "amanyu"
-		password "somepassword"
-		password_confirmation "somepassword"
-	end
+FactoryGirl.define do
+  factory :user do
+    sequence(:name)  { |n| "Person #{n}" }
+    sequence(:email) { |n| "person_#{n}@example.com"}   
+    sequence(:identifier) {|n| "personx#{n}"}
+    password "foobar"
+    password_confirmation "foobar"
+
+    factory :admin do
+      level 0
+    end
+  end
 end

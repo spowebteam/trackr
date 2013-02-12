@@ -5,7 +5,9 @@
   </button>
   <ul class="dropdown-menu">
   	<li><%= link_to "Approve",'#' %></li>
-  	<li><%= link_to "Delete","#" %></li>
+    <% if current_user.admin? && !current_user?(user) %>
+      <li><%= link_to "Delete User",user,method: :delete, data: {confirm: "Are you sure ?"} %></li>
+    <% end %>
   	<li class="divider"></li>
     <li><%= link_to "Make superadmin" ,'#'%></li>
     <li><%= link_to "Make admin",'#' %></li>

@@ -7,10 +7,10 @@ describe "User pages" do
   describe "index" do
     before do 
       sign_in FactoryGirl.create(:user)
-      FactoryGirl.create(:user, name: "Bob", email: "bob@example.com",identifier:"vxcyo8")
-      FactoryGirl.create(:user, name: "Ben", email: "ben@example.com",identifier:"jhsdaf8")
       visit users_path
     end 
+
+
 
     it { should have_selector('title', text:'Users')}
     it {should have_selector('h1',text:'User List')}
@@ -20,7 +20,21 @@ describe "User pages" do
         page.should have_selector('td',text: user.name)
       end
     end
-  end
+
+    describe "pagination" do
+      before(:all) { 30.times { FactoryGirl.create(:user) } }
+      after(:all)  { User.delete_all }
+
+      it { should have_selector('div.pagination') }
+
+      it "should list each user" do
+        User.paginate(page: 1).each do |user|
+          page.should have_selector('td', text: user.name)
+        end
+      end
+    end
+
+    
 
   describe "signup" do
     before { visit signup_path }
@@ -97,5 +111,9 @@ describe "User pages" do
       specify { user.reload.email.should == new_email } 
     end
   end
+
+
+
+
 
 end
