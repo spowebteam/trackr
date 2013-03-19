@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:index,:show,:edit,:update,:destroy]
   before_filter :correct_user, only: [:edit,:update]
-  before_filter :admin_user, only: [:destroy]
+  before_filter :admin_user, only: [:destroy,:editlevel]
   def index
     @users=User.paginate(page: params[:page])
   end
@@ -22,6 +22,18 @@ class UsersController < ApplicationController
   	else
   		render 'new'
   	end
+  end
+
+  def editlevel
+    @user=User.find(params[:id])
+    level=params[:level]
+    if level
+      @user.level = level
+    else
+      @user.level = 127
+    end
+    @user.save
+    redirect_to users_path
   end
 
   def edit

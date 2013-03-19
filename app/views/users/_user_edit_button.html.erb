@@ -9,8 +9,8 @@
       <li><%= link_to "Delete User",user,method: :delete, data: {confirm: "Are you sure ?"} %></li>
     <% end %>
   	<li class="divider"></li>
-    <li><%= link_to "Make superadmin" ,'#'%></li>
-    <li><%= link_to "Make admin",'#' %></li>
+    <li><%= link_to "Make superadmin" ,'#' %></li>
+    <li><%= link_to "Make admin",editlevel_user_path(user,:level => 1),method: :put %></li>
     <li><%= link_to "Make poweruser",'#' %> </li>
   </ul>
 </div>
