@@ -13,12 +13,12 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :identifier, :name, :phone, :password, :password_confirmation, :level
+  attr_accessible :email, :identifier, :name, :phone, :password, :password_confirmation
   has_secure_password
 
   before_save {|user| user.email = email.downcase}
   before_save :create_remember_token
-  before_save :set_deactivated
+  before_create :set_deactivated
 
   validates :name, presence: true , length: {minimum:2,maximum:100}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
   VALID_PHONE_REGEX = /\A\+?[0-9\-\s\(\)]*\z/
   validates :phone, format: {with: VALID_PHONE_REGEX}
   validates :identifier,uniqueness:true
-  validates :password, presence:true , length: {minimum:6 }
-  validates :password_confirmation, presence: true
+  validates :password, presence:true , length: {minimum:6 }, :on => :create
+  validates :password_confirmation, presence: true, :on => :create
 
    def role 
     if self.level ==0

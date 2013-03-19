@@ -6,13 +6,11 @@ namespace :db do
                  password:"foobar",
                  password_confirmation:"foobar",
                  identifier:"thedummyuser",
-                 phone:"+91000000",
-                 level:0)
+                 phone:"+91000000")
     99.times do |n|
       name=Faker::Name.name
       email="some-#{n+1}@manyu.in"
       password="password"
-      level=127
       identifier="thedummy#{n+1}"
       phone="+910000111222"
       User.create!(name:name,
@@ -20,8 +18,7 @@ namespace :db do
                  password:password,
                  password_confirmation:password,
                  identifier:identifier,
-                 phone:phone,
-                 level:level)
+                 phone:phone)
     end
   end
 
