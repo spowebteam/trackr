@@ -13,6 +13,8 @@ Trackr::Application.routes.draw do
     put :editlevel, :on => :member
   end
   
+  resources :teams
+
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'static#home'
 
