@@ -30,27 +30,29 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, :on => :create
 
    def role 
-    if self.level ==0
+    if self.level == Global.level[:superadmin]
       return "superadmin"
-    elsif self.level==1
+    elsif self.level==Global.level[:admin]
       return "admin"
-    elsif self.level<10
+    elsif self.level <= Global.level[:poweruser]
       return "poweruser"
-    elsif self.level<100
+    elsif self.level <= Global.level[:user]
       return "user"
-    else
-      return "unavailable"
+    elsif self.level == Global.level[:disabled]
+      return "disabled"
+    elsif self.level == Global.level[:deleted]
+      return "deleted"
     end
   end
 
   def superadmin?
-    if self.level==0
+    if self.level==Global.level[:superadmin]
       true
     end
   end
 
   def admin?
-    if self.level<2
+    if self.level <= Global.level[:admin]
       return true
     end
   end

@@ -1,16 +1,30 @@
+<!--
+This file has user level numbers, 
+ -->
 <div class="btn-group ">
-  <%= link_to raw("<i class='icon-user icon-white'></i> User"), user, :class => "btn btn-inverse" %>
+  <%= link_to "User", user, :class => "btn btn-primary" %>
   <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-  	<li><%= link_to "Approve",'#' %></li>
-    <% if current_user.admin? && !current_user?(user) %>
-      <li><%= link_to "Delete User",user,method: :delete, data: {confirm: "Are you sure ?"} %></li>
+  	<% if user.level >= Global.level[:disabled] %>
+    <li><%= link_to "Approve",editlevel_user_path(user,level: Global.level[:user] ),method: :put %></li>
     <% end %>
-  	<li class="divider"></li>
-    <li><%= link_to "Make superadmin" ,'#' %></li>
-    <li><%= link_to "Make admin",editlevel_user_path(user,:level => 1),method: :put %></li>
-    <li><%= link_to "Make poweruser",'#' %> </li>
+    <% if !current_user?(user) && !user.admin? %>
+    <li><%= link_to "Disable User",editlevel_user_path(user,level: Global.level[:disabled]),method: :put %></li> 
+    <% end %>
+    <% if ((current_user.admin? && !user.superadmin?) || (current_user.superadmin?)) && !current_user?(user) %>
+      <li><%= link_to "Delete User", editlevel_user_path(user,level: Global.level[:deleted]),method: :put  %></li>
+    <% end %>
+  	<% if current_user.superadmin? && !current_user?(user) %>
+      <li><%= link_to "Make admin",editlevel_user_path(user,level: Global.level[:admin]),method: :put %></li>
+    <% end %>
+    <% if !user.admin? %>
+    <li><%= link_to "Make poweruser",editlevel_user_path(user,level:Global.level[:poweruser]),method: :put %> </li>
+    <% end %>
+    <% if current_user.superadmin? && !current_user?(user) %>
+      <li class="divider"></li>
+      <li><%= link_to "Permanently Delete User",user,method: :delete, data: {confirm: "This will permanently delete the user, the action CANNOT be undone, are you sure ?"} %></li>
+    <% end %>
   </ul>
 </div>

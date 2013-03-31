@@ -1,0 +1,18 @@
+# config/application.yml
+defaults: &defaults
+  level:
+    superadmin: 0
+    admin: 1
+    poweruser: 10
+    user: 100
+    disabled: 127
+    deleted: 128
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

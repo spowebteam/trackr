@@ -3,7 +3,11 @@ class UsersController < ApplicationController
   before_filter :correct_user, only: [:edit,:update]
   before_filter :admin_user, only: [:destroy,:editlevel]
   def index
-    @users=User.paginate(page: params[:page])
+    if current_user.superadmin?
+      @users=User.paginate(page: params[:page])
+    else
+      @users=User.where(level: Global.level[:superadmin] .. Global.level[:disabled]).paginate(page: params[:page])
+    end
   end
   def show
   	@user=User.find(params[:id])
