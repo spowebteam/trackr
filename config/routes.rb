@@ -1,4 +1,14 @@
 Trackr::Application.routes.draw do
+  get "teams/new"
+
+  get "teams/index"
+
+  get "teams/show"
+
+  get "teams/edit"
+
+  get "teams/destroy"
+
   resources :users do
     put :editlevel, :on => :member
   end

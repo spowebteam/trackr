@@ -21,10 +21,6 @@ describe "User pages" do
       end
     end
 
-    describe "level actions" do 
-      
-    end
-
     describe "pagination" do
       before(:all) { 30.times { FactoryGirl.create(:user) } }
       after(:all)  { User.delete_all }
@@ -37,7 +33,7 @@ describe "User pages" do
         end
       end
     end
-
+  end  
     
 
   describe "signup" do
@@ -65,7 +61,6 @@ describe "User pages" do
             expect {click_button submit}.to change(User, :count).by(1)
         end
     end
-    
   end
 
   describe "profile page" do
@@ -92,10 +87,10 @@ describe "User pages" do
         it { should have_selector('title', text: "Edit")}
     end
 
-    describe "with invalid information" do
-        before{click_button "Update"}
-        it {should have_content('error')}
-    end
+    # describe "with invalid information" do
+    #     before{click_button "Update"}
+    #     it {should have_content('error')}
+    # end
 
     describe "with valid information" do
       let(:new_name)  { "New Name" }
@@ -115,9 +110,4 @@ describe "User pages" do
       specify { user.reload.email.should == new_email } 
     end
   end
-
-
-
-
-
 end

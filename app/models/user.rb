@@ -58,6 +58,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def poweruser?
+    if self.level <= Global.level[:poweruser]
+      return true
+    end
+  end
 
   private
 
