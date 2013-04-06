@@ -3,11 +3,14 @@ class UsersController < ApplicationController
   before_filter :correct_user, only: [:edit,:update]
   before_filter :admin_user, only: [:destroy,:editlevel]
   def index
+    @counterstart=1;
     if current_user.superadmin?
       @users=User.paginate(page: params[:page])
     else
       @users=User.where(level: Global.level[:superadmin] .. Global.level[:disabled]).paginate(page: params[:page])
     end
+    @pagenum= params[:page]? params[:page].to_i : 1
+    @counterstart=(User.per_page*(@pagenum-1))+1  
   end
   def show
   	@user=User.find(params[:id])
@@ -22,7 +25,9 @@ class UsersController < ApplicationController
   	if @user.save
       sign_in @user
   		flash[:success] = "Welcome to the Sample App!"
-  		redirect_to @user
+      unless signed_in?
+  		  redirect_to @user
+      end
   	else
   		render 'new'
   	end

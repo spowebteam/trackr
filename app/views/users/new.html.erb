@@ -1,6 +1,6 @@
 <% provide(:title,'Sign Up') %>
-<div class="container">
-  <div class="span6 offset3">
+<div class="row pagination-centered">
+  <div class="span12">
     <%= form_for(@user) do |f| %>
 
       <%= render 'shared/error_messages' %>
@@ -22,7 +22,7 @@
 
       <%= f.label :identifier %>
       <%= f.text_field :identifier %>
-
+      <hr/>
       <%= f.submit "Signup", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

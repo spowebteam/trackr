@@ -12,7 +12,8 @@ class TeamsController < ApplicationController
       flash[:success] = "Team #{@team.name} Created"
       redirect_to teams_path
     else
-      render 'new'
+      flash[:error] = "Saving failed"
+      redirect_to request.referer
     end
   end
 
@@ -33,6 +34,9 @@ class TeamsController < ApplicationController
 
   private
     def admin_user
-      redirect_to(root_path) unless current_user.admin?
+     unless current_user.admin?
+       flash[:error] = "Access Denied"
+       redirect_to request.referer
+     end
     end
 end

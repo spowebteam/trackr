@@ -2,8 +2,8 @@
 
 <h1>Update your profile</h1>
 
-<div class="row">
-	<div class="span6 offset3">
+<div class="row pagination-centered">
+	<div class="span12">
 		<%= form_for(@user) do |f| %>
 			<%=render 'shared/error_messages' %>
 
@@ -24,7 +24,7 @@
 
 			<%=f.label :password_confirmation %>
 			<%=f.password_field :password_confirmation %>
-
+			<hr />
 			<%= f.submit "Update",class:"btn btn-large btn-primary" %>
 		<% end %>
 	</div>

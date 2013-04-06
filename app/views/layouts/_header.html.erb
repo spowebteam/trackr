@@ -1,5 +1,5 @@
 <% provide(:user,'None') %>
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
           
@@ -8,7 +8,10 @@
                 <ul class="nav pull-right">
                     <li><%= link_to "About",about_path %></li>
                     <% if signed_in? %>
-                           <li><%= link_to "Users", '#' %></li>
+                          <% if current_user.admin? %>
+                          <li><%= link_to "Teams",teams_path %></li>
+                          <% end %>
+                           <li><%= link_to "Users",users_path %></li>
                                 <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>
@@ -30,3 +33,4 @@
         </div>
     </div>
 </header>
+<hr/>
