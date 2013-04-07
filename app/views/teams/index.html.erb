@@ -1,6 +1,7 @@
 <% provide(:title,"Teams") %>
 <h1>Team lists</h1>
 <% @teams.each do |team| %>
+<%= link_to(team) do %>
 <div class="span4 rounded">
 	<h4><%= team.name %></h4>
 	<p><%= team.description %> </p>
@@ -13,7 +14,7 @@
 		</ul>
 	</div>
 </div>
-
+<% end %>
 <% end %>
 
 

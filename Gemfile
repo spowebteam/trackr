@@ -6,6 +6,8 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'will_paginate','3.0.3'
 gem 'bootstrap-will_paginate','0.0.6'
 gem 'settingslogic'
+gem 'rails3-jquery-autocomplete'
+gem 'nifty-generators'
 
 group :production do
   gem 'pg'

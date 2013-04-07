@@ -1,19 +1,11 @@
 Trackr::Application.routes.draw do
-  get "teams/new"
-
-  get "teams/index"
-
-  get "teams/show"
-
-  get "teams/edit"
-
-  get "teams/destroy"
-
   resources :users do
     put :editlevel, :on => :member
   end
   
-  resources :teams
+  resources :teams 
+
+  get 'teams/autocomplete_user_name'
 
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'static#home'

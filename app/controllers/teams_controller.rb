@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
   before_filter :admin_user
   def new
     @user=current_user
-    @team=Team.new
+    @team=Team.new   
   end
 
   def create
@@ -22,6 +22,12 @@ class TeamsController < ApplicationController
   end
 
   def show
+    @users=User.select("name,identifier,id").where(level: Global.level[:superadmin] .. Global.level[:disabled])
+    # @user_name=@users.pluck(:name)
+    # @user_identifier=@users.pluck(:identifier)
+    # @user_ids=@users.pluck(:id)
+    # @items=@user_name.zip(@user_identifier)
+    # @items=@items.zip(@user_ids)
     @user=current_user
     @team=Team.find(params[:id])
   end
