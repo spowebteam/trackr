@@ -1,19 +1,11 @@
 <% provide(:title,@team.name) %>
-<%= javascript_tag "var autocomplete_items = #{ @autocomplete_items.to_json };" %>
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-        $('#auto_complete').typeahead({source: autocomplete_items});
-    });
-</script>
+
 <h1><%=@team.name %>  </h1>
 <p><%= @team.description %> </p>
 <strong>Members</strong>
-	<%= form_for(@team) do |f| %>
-	  <%= f.label :users %>
-      <%= f.text_field :users, placeholder: "Add members", id: "auto_complete" %>
-
-      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
-    <% end %> 
+    <%= form_for @team do |f| %>
+  <%= f.autocomplete_field :user_name, autocomplete_user_name_teams_path %>
+<% end %>
 	<div>
 		<ul>
 

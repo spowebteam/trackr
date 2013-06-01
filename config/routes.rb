@@ -3,9 +3,11 @@ Trackr::Application.routes.draw do
     put :editlevel, :on => :member
   end
   
-  resources :teams 
+  resources :teams do
+    get :autocomplete_user_name, :on => :collection
+  end
 
-  get 'teams/autocomplete_user_name'
+
 
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'static#home'

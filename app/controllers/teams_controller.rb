@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_filter :admin_user
+  autocomplete :user, :name
   def new
     @user=current_user
     @team=Team.new   
