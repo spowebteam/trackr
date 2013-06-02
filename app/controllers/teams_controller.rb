@@ -19,6 +19,7 @@ class TeamsController < ApplicationController
   end
 
   def index
+    @user = current_user
     @teams=Team.all
   end
 
@@ -34,10 +35,12 @@ class TeamsController < ApplicationController
   end
 
   def edit
+    @user=current_user
     @team=Team.find(params[:id])
   end
 
   def update
+    @user=current_user
     @team=Team.find(params[:id])
     if @team.update_attributes(params[:team])
       flash[:success]="Team details updated"
