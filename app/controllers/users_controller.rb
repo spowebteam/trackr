@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :correct_user, only: [:edit,:update]
   before_filter :admin_user, only: [:destroy,:editlevel]
   def index
+
     @counterstart=1;
     if current_user.superadmin?
       @users=User.paginate(page: params[:page])
@@ -10,7 +11,14 @@ class UsersController < ApplicationController
       @users=User.where(level: Global.level[:superadmin] .. Global.level[:disabled]).paginate(page: params[:page])
     end
     @pagenum= params[:page]? params[:page].to_i : 1
-    @counterstart=(User.per_page*(@pagenum-1))+1  
+    @counterstart=(User.per_page*(@pagenum-1))+1
+    respond_to do |format|
+      format.html
+      format.json do 
+        @allusers = User.where(level: Global.level[:superadmin] .. Global.level[:disabled]).where("name like ?", "%#{params[:q]}%") 
+        render :json => @allusers 
+      end
+    end
   end
   def show
   	@user=User.find(params[:id])
