@@ -7,7 +7,6 @@ gem 'will_paginate','3.0.3'
 gem 'bootstrap-will_paginate','0.0.6'
 gem 'settingslogic'
 gem 'nifty-generators'
-gem 'rails3-jquery-autocomplete'
 
 group :production do
   gem 'pg'

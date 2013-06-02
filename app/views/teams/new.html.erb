@@ -10,6 +10,9 @@
 
       <%= f.label :description %>
       <%= f.text_area :description %>
+
+      <%= f.label :user_tokens, "Members" %><br />  
+      <%= f.text_field :user_tokens %>
       <hr />
       <%= f.submit "Create New Team", class: "btn btn-large btn-primary" %>
     <% end %>
