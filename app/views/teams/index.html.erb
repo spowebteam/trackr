@@ -8,7 +8,7 @@
 	<strong>Members</strong>
 	<div>
 		<ul>
-		<% team.users do |user| %>
+		<% team.users.each do |user| %>
 		<li><%= user.name %></li>
 		<% end %>
 		</ul>
