@@ -4,8 +4,8 @@
 <p><%= @team.description %> </p>
 <strong>Members</strong>
     <%= form_for @team do |f| %>
-    <%= f.hidden_field :to, :id => "real_user_id" %>
-  <%= autocomplete_field_tag 'fake_user','',autocomplete_user_name_teams_path, :size =>75, :id_element => "#real_user_id" %>
+    <%= f.hidden_field :user_id, :id => "real_user_id" %>
+  <%= autocomplete_field_tag 'fake_user','',autocomplete_user_name_teams_path, :size =>75, :id_element =>'#real_user_id' %>
 <% end %>
 	<div>
 		<ul>
