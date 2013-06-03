@@ -18,14 +18,29 @@ class CompaniesController < ApplicationController
   	end
   end
   def show
+    @company=Company.find(params[:id])
   end
   def edit
+    @company=Company.find(params[:id])
   end
   def destroy
   end
   def index
+    @counterstart=1;
+    if current_user.admin?
+      @companies=Company.all
+    end
+    
   end
   def update
+    @company=Company.find(params[:id])
+    if @company.update_attributes(params[:company])
+        flash[:success]="Profile updated"
+        #sign_in @user
+        redirect_to @company
+    else
+      render 'edit'
+    end
   end
   private
     def signed_in_user

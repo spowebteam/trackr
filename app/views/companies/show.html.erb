@@ -1,2 +1,15 @@
-<h1>Companies#show</h1>
-<p>Find me in app/views/companies/show.html.erb</p>
+<% provide(:title,@company.name) %>
+
+<h1><%=@company.name %>  <small><%= @company.identifier %></small>
+	
+    </h1>
+<em> <%=@company.location %></em>
+<address>
+	<strong><%=@company.url %></strong><br/>
+	<%= @company.address %><br/>
+	<%= @company.phone %><br />
+	<% if current_user.admin?%>
+	<%= link_to "Edit Profile",edit_company_path(@company) %>
+	<%end%>
+</address>
+

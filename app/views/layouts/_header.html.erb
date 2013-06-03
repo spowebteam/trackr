@@ -11,6 +11,9 @@
                           <% if current_user.admin? %>
                           <li><%= link_to "Teams",teams_path %></li>
                           <% end %>
+                          <% if current_user.admin? %>
+                          <li><%= link_to "Companies",companies_path %></li>
+                          <% end %>
                            <li><%= link_to "Users",users_path %></li>
                                 <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
