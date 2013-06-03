@@ -24,6 +24,9 @@ class CompaniesController < ApplicationController
     @company=Company.find(params[:id])
   end
   def destroy
+    Company.find(params[:id]).destroy
+    flash[:success]="Company Profile Deleted."
+    redirect_to companies_url
   end
   def index
     @counterstart=1;
@@ -41,6 +44,12 @@ class CompaniesController < ApplicationController
     else
       render 'edit'
     end
+  end
+  def activity
+    @company=Company.find(params[:id])
+    @company.active=!@company.active
+    @company.save
+    redirect_to @company
   end
   private
     def signed_in_user

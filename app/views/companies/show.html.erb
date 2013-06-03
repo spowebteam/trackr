@@ -1,6 +1,7 @@
 <% provide(:title,@company.name) %>
 
-<h1><%=@company.name %>  <small><%= @company.identifier %></small>
+<h1><%=@company.name %>  <small><%= @company.identifier %><%if !@company.active?%>
+is disabled<%end%></small>
 	
     </h1>
 <em> <%=@company.location %></em>
@@ -9,7 +10,8 @@
 	<%= @company.address %><br/>
 	<%= @company.phone %><br />
 	<% if current_user.admin?%>
-	<%= link_to "Edit Profile",edit_company_path(@company) %>
+	<%= link_to "Edit Profile",edit_company_path(@company) %><% if @company.active%>&nbsp&nbsp<%=link_to "Disable",activity_company_path(@company),method: :put %><% else%>
+	<%=link_to "Make Active",activity_company_path(@company),method: :put %><%end%><% if current_user.superadmin?%>&nbsp&nbsp<%= link_to "Delete Company Profile",@company,method: :delete, data: {confirm: "This will permanently delete the user, the action CANNOT be undone, are you sure ?"} %><%end%>
 	<%end%>
 </address>
 
