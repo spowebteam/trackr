@@ -9,7 +9,7 @@ class CompaniesController < ApplicationController
   	@company = Company.new (params[:company])
   	if @company.save
       #sign_in @user
-  		flash[:success] = "Welcome to the Sample App!"
+  		flash[:success] = "Welcome to the Student Placement Office, IIT Kanpur!"
       
   		  redirect_to @company
       
