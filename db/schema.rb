@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(:version => 20130603163421) do
     t.string   "phone"
     t.string   "url"
     t.string   "address"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.boolean  "active"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "active",     :default => false
   end
 
   create_table "teams", :force => true do |t|
