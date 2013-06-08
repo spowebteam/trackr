@@ -3,7 +3,14 @@
 <h1><%=@team.name %>  </h1>
 <p><%= @team.description %> </p>
 <strong>Members</strong>
+<<<<<<< HEAD
     <div>
+=======
+    <%= form_for @team do |f| %>
+    <%= f.autocomplete_field :autocomplete_user_name, autocomplete_user_name_teams_path %>
+<% end %>
+	<div>
+>>>>>>> 7a00f6cd51585ac8948d2c4178b637b597834e05
 		<ul>
 
 		<% @team.users.each do |user| %>

@@ -1,4 +1,9 @@
 Trackr::Application.routes.draw do
+  get "companies/new"
+
+  resources :companies do
+    put :activity, :on => :member
+  end
   resources :users do
     put :editlevel, :on => :member
   end

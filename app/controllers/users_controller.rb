@@ -33,9 +33,9 @@ class UsersController < ApplicationController
   	if @user.save
       sign_in @user
   		flash[:success] = "Welcome to the Sample App!"
-      unless signed_in?
-  		  redirect_to @user
-      end
+      
+  		redirect_to @user
+      
   	else
   		render 'new'
   	end

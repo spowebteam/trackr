@@ -1,6 +1,10 @@
 <% provide(:title,@user.name) %>
 
-<h1><%=@user.name %>  <small><%= @user.identifier %></small><%= render 'users/user_edit_button', user: @user %></h1>
+<h1><%=@user.name %>  <small><%= @user.identifier %></small>
+	<% if @user.admin? %>
+	<%= render 'users/user_edit_button', user: @user %>
+	<% end %>
+    </h1>
 <em>is <%=@user.role %></em>
 <address>
 	<strong><%=@user.email %></strong><br/>
