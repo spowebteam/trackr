@@ -1,4 +1,7 @@
 Trackr::Application.routes.draw do
+  resources :contacts
+
+
   get "companies/new"
 
   resources :companies do
