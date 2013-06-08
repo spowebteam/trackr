@@ -3,11 +3,7 @@
 <h1><%=@team.name %>  </h1>
 <p><%= @team.description %> </p>
 <strong>Members</strong>
-
-    <%= form_for @team do |f| %>
-    <%= f.autocomplete_field :autocomplete_user_name, autocomplete_user_name_teams_path %>
-<% end %>
-		<ul>
+<ul>
 
 		<% @team.users.each do |user| %>
 		<li><%= user.name %></li>
