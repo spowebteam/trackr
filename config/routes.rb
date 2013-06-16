@@ -1,8 +1,6 @@
 Trackr::Application.routes.draw do
-  resources :contacts
-
-
-  get "companies/new"
+  
+  #get "companies/new"
 
   resources :companies do
     put :activity, :on => :member
@@ -15,17 +13,16 @@ Trackr::Application.routes.draw do
     get :autocomplete_user_name, :on => :collection
   end
 
-
-
+  resources :contacts
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'static#home'
 
   match '/about',     to: 'static#about'
-  match '/contact',   to: 'static#contact'
+  match '/contactus', to: 'static#contact'
   match '/signup',    to: 'users#new'
   match '/signin',    to: 'sessions#new'
   match '/signout',   to: 'sessions#destroy', via: :delete
-  
+  #match '/contacts',  to: 'contacts#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
