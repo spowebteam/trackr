@@ -4,6 +4,7 @@ Trackr::Application.routes.draw do
 
   resources :companies do
     put :activity, :on => :member
+    resources :contacts, :on => :member
   end
   resources :users do
     put :editlevel, :on => :member
@@ -13,7 +14,9 @@ Trackr::Application.routes.draw do
     get :autocomplete_user_name, :on => :collection
   end
 
-  resources :contacts
+
+
+  
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'static#home'
 
