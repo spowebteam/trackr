@@ -1,12 +1,13 @@
 class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
+  before_filter :correct_user
   def index
-    @contacts = Contact.all
-
+    @contacts = Contact.paginate(page: params[:page])
+    @all_contacts=Contact.all
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @contacts }
+      format.json { render json: @all_contacts }
     end
   end
 
@@ -80,4 +81,8 @@ class ContactsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  private
+    def correct_user
+      redirect_to root_path, error:"Access Denied" unless current_user.poweruser?
+    end
 end
