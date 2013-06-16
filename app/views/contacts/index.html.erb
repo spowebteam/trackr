@@ -11,9 +11,9 @@
     <th>Mobile</th>
     <th>Email</th>
     <th>Address</th>
+    <th>Company</th>
     <th></th>
-    <th></th>
-    <th></th>
+   
   </tr>
 
 <% @contacts.each do |contact| %>
@@ -24,9 +24,8 @@
     <td><%= contact.mobile %></td>
     <td><%= contact.email %></td>
     <td><%= contact.address %></td>
-    <td><%= link_to 'Show', contact %></td>
-    <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-    <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><% if contact.company %><%= contact.company.name %><% else %><%= "unassigned" %><% end %></td>
+    <td><%= render 'contacts/contact_button', contact: contact %></td>
   </tr>
 <% end %>
 </table>

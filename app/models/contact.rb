@@ -1,5 +1,6 @@
 class Contact < ActiveRecord::Base
   attr_accessible :address, :designation, :email, :landline, :mobile, :name
+  belongs_to :company
   validates :name, presence: true , length: {minimum:2,maximum:100}
   validates :address, length: {minimum:2,maximum:100}
   VALID_PHONE_REGEX = /\A[[\+?[0-9\-\s\(\)\/\,]*]\,]*\z/

@@ -1,16 +1,12 @@
 <% provide(:title,@contact.name) %>
 
-<p>
-  <b>Name:</b>
-  <%= @contact.name %>
-</p>
-
-<p>
-  <b>Designation:</b>
-  <%= @contact.designation %>
-</p>
-
-<p>
+  <h1><%= @contact.name %><small><b></b><%= @contact.designation %> @ 
+    <% if @contact.company %>
+    <%=@contact.company.name%>
+    <% else %>
+    <%= "unassigned" %>
+    <% end %></small></h1>
+  <hr />
   <b>Landline:</b>
   <%= @contact.landline %>
 </p>
@@ -29,6 +25,8 @@
   <b>Address:</b>
   <%= @contact.address %>
 </p>
+<p>
+ 
 
 
 <%= link_to 'Edit', edit_contact_path(@contact) %> |
