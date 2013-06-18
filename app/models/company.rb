@@ -1,5 +1,6 @@
 class Company < ActiveRecord::Base
   attr_accessible :address, :identifier, :location, :name, :phone, :url
+  has_many :companies
   validates :name, presence: true , length: {minimum:2,maximum:100}
   validates :identifier,uniqueness:true
   validates :address, presence: true , length: {minimum:2,maximum:100}

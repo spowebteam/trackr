@@ -1,8 +1,10 @@
 Trackr::Application.routes.draw do
-  get "companies/new"
+  
+  #get "companies/new"
 
   resources :companies do
     put :activity, :on => :member
+    resources :contacts, :on => :member
   end
   resources :users do
     put :editlevel, :on => :member
@@ -14,15 +16,16 @@ Trackr::Application.routes.draw do
 
 
 
+  
   resources :sessions, only: [:new, :create, :destroy]
   root to: 'static#home'
 
   match '/about',     to: 'static#about'
-  match '/contact',   to: 'static#contact'
+  match '/contactus', to: 'static#contact'
   match '/signup',    to: 'users#new'
   match '/signin',    to: 'sessions#new'
   match '/signout',   to: 'sessions#destroy', via: :delete
-  
+  #match '/contacts',  to: 'contacts#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
