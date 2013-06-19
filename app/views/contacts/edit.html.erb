@@ -1,15 +1,73 @@
-<% provide(:title,@user.name) %>
-<h1>Editing contact</h1>
+<% provide(:title,@contact.name) %>
+<div class="row-fluid">
+    <span class="span12">
+<%= form_for (@contact), :html => {:class => "form-horizontal span12"} do |f| %>
 
-
-
-<div class="row pagination-centered">
-	<div class="span12">
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @contact %> |
-<%= link_to 'Back', contacts_path %>
-
-	</div>
+  <fieldset>
+    <legend>New contact for <%= @company.name %></legend>
+    <%= render 'shared/error_messages' %>
+    <div class="control-group">
+      <%= f.label :name , :class =>"control-label"%>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :company , :class =>"control-label"%>
+      <div class="controls">
+        <span class="input-large uneditable-input"><%= @company.name %></span>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :designation , :class =>"control-label"%>
+      <div class="controls">
+        <%= f.text_field :designation %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :mobile , :class =>"control-label" %>
+      <div class="controls">
+        <%= f.text_field :mobile %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :landline , :class =>"control-label"%>
+      <div class="controls">
+        <%= f.text_field :landline %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :email , :class =>"control-label"%>
+      <div class="controls">
+        <%= f.text_field :email %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :address , :class =>"control-label"%>
+      <div class="controls">
+        <%= f.text_area :address , :rows => "3"%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :default , :class =>"control-label"%>
+      <div class="controls">
+        <% if @company.contacts.empty? %>
+          
+          <%= f.check_box :default ,:disabled => "disabled", :checked => "checked" %>
+        <% else %>
+          
+          <%= f.check_box :default %>
+          <span class="help-block">
+            Default already set, checking will change it.
+          </span>
+        <% end %>
+      </div>
+    </div>
+    <div class="controls">
+      <%= f.submit "Add Contact +", class: "btn btn-primary" %>
+      <%= link_to "Back", @company,class: "btn btn-inverse" %>
+    </div>
+  </fieldset>
+<% end %>
+</span>
 </div>

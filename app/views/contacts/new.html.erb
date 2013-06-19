@@ -47,6 +47,21 @@
         <%= f.text_area :address , :rows => "3"%>
       </div>
     </div>
+    <div class="control-group">
+      <%= f.label :default , :class =>"control-label"%>
+      <div class="controls">
+        <% if @company.contacts.empty? %>
+          
+          <%= f.check_box :default ,:disabled => "disabled", :checked => "checked" %>
+        <% else %>
+          
+          <%= f.check_box :default %>
+          <span class="help-block">
+            Default already set, checking will change it.
+          </span>
+        <% end %>
+      </div>
+    </div>
     <div class="controls">
       <%= f.submit "Add Contact +", class: "btn btn-primary" %>
       <%= link_to "Back", @company,class: "btn btn-inverse" %>

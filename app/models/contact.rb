@@ -1,5 +1,5 @@
 class Contact < ActiveRecord::Base
-  attr_accessible :address, :designation, :email, :landline, :mobile, :name
+  attr_accessible :address, :designation, :email, :landline, :mobile, :name, :default
   belongs_to :company
   validates :name, presence: true , length: {minimum:2,maximum:100}
   # validates :address, length: {minimum:2,maximum:100}
@@ -9,4 +9,9 @@ class Contact < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, format: { with: VALID_EMAIL_REGEX }
   before_save {|contact| contact.email = email.downcase}
+  after_save do |contact|
+    if contact.default then
+      Contact.where('"contacts"."default"="t" AND "contacts"."id" != ?',contact.id).update_all('"default"="f"')
+    end
+  end
 end

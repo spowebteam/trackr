@@ -1,0 +1,4 @@
+$(document).ready(function() {
+ 
+$('#contact-modal').html('<%= escape_javascript(render "contacts/modal", :object => @contact) %>');
+});

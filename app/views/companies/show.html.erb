@@ -2,34 +2,44 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <span class="span6">
-          <h1 class="heading"><%= @company.name %></h1>
-        </span>
-        <span class="span6 span6-1">
-          <button class="btn pull-right btn-primary">Status</button>
-        </span>
+      <h1 class="heading">
+        <%= @company.name %>
+      </h1>
+      <div>
+        <%= link_to "#{@company.url}" ,@company.url %>
       </div>
-      <div class="row-fluid">
-        <span class="span4">
-          <div>
-            <%= link_to "#{@company.url}" ,@company.url %>
-          </div>
+      <div>
           <p><%= @company.phone%></p>
           <p><%= @company.address %></p>
-        </span>
-        <span class="span8">
+      </div>  
+    </span>
+    <span class="span6">
+      <% if @default %>
+        <h4 class="heading">Contact</h4>
+        <p>
+          <strong><%= link_to @default.name, show_modal_company_contact_path(:company_id => @company.id,:id => @default.id), {:remote => true, 'data-controls-modal' =>  "contact-modal",'data-toggle'=>'modal', 'data-target'=>'#contact-modal'} %></strong>
+          <%= "(#{@default.designation})" %> 
+          <span class="badge badge-info pull-right">Default</span>
+        <br><tel><%= "(M) #{@default.mobile}, (Off) #{@default.landline}" %>
+        <br><a href='mailto:<%=@default.email%>'><%= @default.email %></a></p>
+        <h5 class="heading">All contacts <small><%= link_to "Add Contact", new_company_contact_path(:company_id => @company.id),:class => "pull-right" %> </small></h5>
+        <% @i=0 %>
+        <% @company.contacts.each do |contact| %>
+           <% unless contact.default %>
+             <%= link_to contact.name, show_modal_company_contact_path(:company_id => @company.id,:id => contact.id), {:remote => true, 'data-controls-modal' =>  "contact-modal",'data-toggle'=>'modal', 'data-target'=>'#contact-modal'} %>
+           <% end %>
+        <% end %>
+      <% end %>
+      <br/>
+      
+      <p>Point of Contact is
+        <a href="#">Abhimanyu</a>and managed by
+        <a href="#">Amit Sar</a>
+      </p>
+    </span>
+  </div>
 
-          <span class="badge">Default</span>
-          <p>Mr. Johh Doe (HR Lead)
-            <br>+91 23 234 342 23 , +91 7342 34 34 23
-            <br>some@indriya.in&nbsp;</p>
-          <a class="dom-link" href="#">Jane D'Souza,</a>
-          <a class="dom-link" href="#">Susan James,</a>
-          <a class="dom-link" href="#">Amrita Singh</a>
-          <p>Point of Contact is
-            <a href="#">Abhimanyu</a>and managed by
-            <a href="#">Amit Sar</a>
-          </p>
-        </span>
+   
       </div>
       <div class="row-fluid">
         <span class="span3">
@@ -64,5 +74,14 @@
       </div>
       
     </div>
-
+<div class="modal hide fade" id="contact-modal">
+  <div class="modal-header">
+    <a href="#" class="close">×</a>
+    <h3>Loading...</h3>
+  </div>
+  <div class="modal-body center">
+      <%= image_tag "loading.gif" %>
+  </div>
+  <div class="modal-footer">&nbsp;</div>
+</div>
 

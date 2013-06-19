@@ -4,22 +4,48 @@ class ContactsController < ApplicationController
   before_filter :correct_user
   
   def new
-    @company = Company.find(params[:company_id])
-    @contact = @company.contacts.new
+    if params[:company_id] == nil
+      flash[:error] = "Cannot create contact without company"
+      redirect_to root_path
+    else
+      @company = Company.find(params[:company_id])
+      @contact = @company.contacts.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @contact }
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @contact }
+      end
     end
   end
 
+  def show_modal
+    @company = Company.find(params[:company_id])
+    @contact = Contact.find(params[:id])
+  end
+  def show
+    @company = Company.find(params[:company_id])
+    @contact = Contact.find(params[:id])
+    unless @contact
+      flash[:error] = "Contact has left the building"
+      redirect_to @company
+    end
+    respond_to do |format|
+      format.html 
+      format.json {render json:@contact}
+    end 
+  end
   def edit
+    @company = Company.find(params[:company_id])
     @contact = Contact.find(params[:id])
   end
 
   # POST /contacts
   # POST /contacts.json
   def create
+    unless params[:company_id] then
+      flash[:error] = "Cannot create contact without company"
+      redirect_to root_path
+    end
     @company = Company.find(params[:company_id])
     @contact = @company.contacts.build(params[:contact])
 
@@ -35,10 +61,16 @@ class ContactsController < ApplicationController
   # PUT /contacts/1.json
   def update
     @contact = Contact.find(params[:id])
-
+    @company = Company.find(@contact.company_id)
+    if @contact.default
+      params[:contact][:default] = true
+    end
     respond_to do |format|
       if @contact.update_attributes(params[:contact])
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
+        #if reset_default then
+
+        flash[:success] = "Contact was edited"
+        format.html { redirect_to @company}
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
