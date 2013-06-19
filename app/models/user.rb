@@ -69,6 +69,12 @@ class User < ActiveRecord::Base
     def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64
     end
+    
+    def correct_user
+      @user=User.find(params[:id])
+
+      redirect_to root_path, error:"Access Denied" unless current_user?(@user)
+    end
 
     def set_deactivated
       self.level=127
