@@ -1,10 +1,10 @@
 <div class="row-fluid">
     <span class="span12">
-<h1>New contact for <%= @company.name %></h1>
-
 <%= form_for [@company,@company.contacts.build] , :html => {:class => "form-horizontal span12"} do |f| %>
+
   <fieldset>
-    <legend>Legend</legend>
+    <legend>New contact for <%= @company.name %></legend>
+    <%= render 'shared/error_messages' %>
     <div class="control-group">
       <%= f.label :name , :class =>"control-label"%>
       <div class="controls">
