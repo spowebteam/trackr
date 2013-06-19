@@ -2,6 +2,7 @@ class Company < ActiveRecord::Base
   attr_accessible :address, :identifier, :location, :name, :phone, :url
   
   has_many :contacts
+
   belongs_to :pointofcontact, 
   :class_name => 'User', 
   :foreign_key => 'poc_id'
@@ -9,6 +10,10 @@ class Company < ActiveRecord::Base
   belongs_to :manager,
   :class_name => 'User',
   :foreign_key => 'manager_id'
+  
+  has_many :contacts
+
+  has_and_belongs_to_many :teams
   
   validates :name, presence: true , length: {minimum:2,maximum:100}
   validates :identifier,uniqueness:true

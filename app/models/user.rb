@@ -21,6 +21,14 @@ class User < ActiveRecord::Base
   before_create :set_deactivated
   has_and_belongs_to_many :teams
 
+  has_many :contacted_companies,
+  :class_name => 'Company',
+  :foreign_key => 'poc_id'
+
+  has_many :managed_companies,
+  :class_name => 'Company',
+  :foreign_key => 'manager_id'
+  
   validates :name, presence: true , length: {minimum:2,maximum:100}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },uniqueness: true;
@@ -69,7 +77,7 @@ class User < ActiveRecord::Base
     def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64
     end
-    
+
     def correct_user
       @user=User.find(params[:id])
 
