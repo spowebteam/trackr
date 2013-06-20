@@ -11,10 +11,10 @@
       Address :
       <br/>
       <address>
-        <%= @contact.address %>
+        <%= simple_format(@contact.address) %>
       </address></p>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
+    <%= link_to "Edit" , edit_company_contact_path(@company, @contact), class: "btn btn-primary", data: {company_id: @contact.company.id} %>
   </div>
