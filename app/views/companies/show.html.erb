@@ -11,7 +11,11 @@
       <div>
           <p><%= @company.phone%></p>
           <p><%= @company.address %></p>
-      </div>  
+      </div> 
+      <div>
+         <p>Point of Contact :<%= link_to @company.pointofcontact.name, @company.pointofcontact %></p>
+         <p>Managed by <%= link_to @company.manager.name, @company.manager %>
+      </div> 
     </span>
     <span class="span6">
       <% if @default %>
@@ -32,11 +36,9 @@
       <% end %>
       <br/>
       
-      <p>Point of Contact is
-        <a href="#">Abhimanyu</a>and managed by
-        <a href="#">Amit Sar</a>
-      </p>
+      
     </span>
+    <hr />
   </div>
 
    

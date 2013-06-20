@@ -24,10 +24,10 @@
       <%= f.text_field :identifier %>
 
       <%= f.label :point_of_contact %>
-      <%= f.autocomplete_field :poc_id, autocomplete_user_name_companies_path, "data-id-element" => '#company_poc_id' %>
+      <%= f.autocomplete_field :poc_name, autocomplete_user_name_companies_path %>
 
       <%= f.label :Manager %>
-      <%= f.autocomplete_field :manager_id, autocomplete_user_name_companies_path, "data-id-element" => '#company_manager_id' %>
+      <%= f.autocomplete_field :manager_name, autocomplete_user_name_companies_path %>
       <hr/>
       <%= f.submit "Update", class: "btn btn-large btn-primary" %>
     <% end %>

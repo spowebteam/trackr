@@ -1,6 +1,6 @@
 class Company < ActiveRecord::Base
   attr_accessible :address, :identifier, :location, :name, :phone, :url, 
-                  :poc_id,:manager_id
+                  :poc_name,:manager_name
   
   has_many :contacts
 
@@ -13,6 +13,22 @@ class Company < ActiveRecord::Base
   :foreign_key => 'manager_id'
   
   has_many :contacts
+
+  def poc_name
+    pointofcontact.try(:name)
+  end
+
+  def poc_name=(name)
+    self.pointofcontact = User.find_by_name(name) if name.present?
+  end
+
+  def manager_name
+    manager.try(:name)
+  end
+
+  def manager_name=(name)
+    self.manager = User.find_by_name(name) if name.present?
+  end
 
   has_and_belongs_to_many :teams
   
