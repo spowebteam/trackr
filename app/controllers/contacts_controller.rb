@@ -3,6 +3,19 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   before_filter :correct_user
   
+  def index
+    if params[:company_id] == nil
+      @contacts = Contact.paginate(page: params[:page]).includes(:company)
+    else 
+      @company = Company.find(params[:company_id])
+      @contacts = @company.contacts.all
+    end
+    respond_to do |format|
+      format.html # /
+      format.json { render json: @contacts}
+    end
+  end
+
   def new
     if params[:company_id] == nil
       flash[:error] = "Cannot create contact without company"
@@ -23,20 +36,26 @@ class ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
   end
   def show
-    @company = Company.find(params[:company_id])
     @contact = Contact.find(params[:id])
+    if @contact.company_id
+      @company = Company.find(@contact.company_id)
+    end
     unless @contact
       flash[:error] = "Contact has left the building"
-      redirect_to @company
+      if @company
+        redirect_to @company
+      else
+        redirect_to contacts
+      end
     end
     respond_to do |format|
       format.html 
-      format.json {render json:@contact}
+      format.json {render json: @contact}
     end 
   end
   def edit
-    @company = Company.find(params[:company_id])
     @contact = Contact.find(params[:id])
+    @company = Company.find(@contact.company_id)
   end
 
   # POST /contacts

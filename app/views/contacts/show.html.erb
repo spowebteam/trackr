@@ -1,7 +1,13 @@
 <% provide(:title,@contact.name) %>
-
-<h1><%=@contact.name %>  <small><%= @contact.identifier %></small></h1>
+<div class="row-fluid">
+<span class="span12">
+<h1><%=@contact.name %>  <small><%= @contact.designation %></small></h1>
+<hr />
 <address>
   <strong><%=@contact.email %></strong><br/>
   <%= @contact.mobile %><br />
+  <%= @contact.landline %><br />
+  <%= simple_format(@contact.address) %>
 </address>
+</span>
+</div>

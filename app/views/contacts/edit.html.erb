@@ -51,11 +51,13 @@
     <div class="control-group">
       <%= f.label :default , :class =>"control-label"%>
       <div class="controls">
-        <% if @company.contacts.empty? %>
+        <% if @contact.default %>
           
           <%= f.check_box :default ,:disabled => "disabled", :checked => "checked" %>
+          <span class="help-block">
+            If you need to change default, edit the other user, every company has to have one default contact. 
+          </span>
         <% else %>
-          
           <%= f.check_box :default %>
           <span class="help-block">
             Default already set, checking will change it.
