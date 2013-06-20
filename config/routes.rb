@@ -6,6 +6,7 @@ Trackr::Application.routes.draw do
     put :activity, :on => :member
     put :updateteams, :on => :member
     put :updatedescription, :on => :member
+    put :updatestatus, :on => :member
     resources :contacts, :on => :member do
       get :show_modal, :on => :member
     end

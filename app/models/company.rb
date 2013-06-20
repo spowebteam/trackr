@@ -1,6 +1,7 @@
 class Company < ActiveRecord::Base
   attr_accessible :address, :location, :name, :phone, :url, 
-                  :poc_name,:manager_name,:team_tokens, :description, :status
+                  :poc_name,:manager_name,:team_tokens, :description, :status,
+                  :status_text
   
   attr_reader :team_tokens
 
@@ -36,6 +37,48 @@ class Company < ActiveRecord::Base
     self.team_ids=ids.split(',')
   end
 
+  before_create :set_status
+
+  def status_text
+    code=self.status
+    keys=Global.status
+
+    if code.nil?
+      return "Status undefined"
+    elsif code <= keys[:nocontact]
+      "No contact exists"
+    elsif code <= keys[:uncontacted]
+      "Yet to contact"
+    elsif code <= keys[:invitesent]
+      "Invitation Sent"
+    elsif code <= keys[:inviteaccepted]
+      "Invitation Accepted"
+    elsif code <= keys[:jafsent]
+      "JAF Sent"
+    elsif code <= keys[:jaffilled]
+      "JAF Filled"
+    elsif code <= keys[:pptset]
+      "PPT Scheduled"
+    elsif code <= keys[:pptdone]
+      "PPT Done"
+    elsif code <= keys[:testset]
+      "Test Scheduled"
+    elsif code <= keys[:testdone]
+      "Test Completed"
+    elsif code <= keys[:rejected]
+      "Reject Invitation"
+    elsif code <= keys[:novacany]
+      "No Vacany"
+    elsif code <= keys[:contactlater]
+      "Contact Later"
+    elsif code <= keys[:blacklisted]
+      "Blacklisted"
+    end
+  end
+
+  def set_status
+    self.status = Global.level[:nocontact]
+  end
   validates :name, presence: true , length: {minimum:2,maximum:100}
   validates :address, presence: true , length: {minimum:2,maximum:100}
   validates :location, presence: true , length: {minimum:2,maximum:100}

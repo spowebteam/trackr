@@ -3,8 +3,9 @@
   <div class="row-fluid">
     <span class="span6">
       <h1 class="heading">
-        <%= @company.name %><small>Status</small>
-      </h1>
+        <%= @company.name %>
+        <%= render 'companies/statuslist', object: @company %>
+      </h1> 
       <div>
         <%= link_to "#{@company.url}" ,@company.url %>
       </div>

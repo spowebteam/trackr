@@ -1,9 +1,22 @@
-<div class="dropdown">
-  <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-    Status: <%=@company.status_text%>
-    <b class="caret"></b>
+<div class="btn-group pull-right">
+  <a class="btn dropdown-toggle " data-toggle="dropdown" href="#">
+    Status : <%= @company.status_text %>
+    <span class="caret"></span>
   </a>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-    ...
+  <ul class="dropdown-menu " >
+    <li><%= link_to "No contact exists" , updatestatus_company_path(@company,status: Global.status[:nocontact]  ) ,method: :put%></li>
+    <li><%= link_to "Yet to contact" , updatestatus_company_path(@company,status: Global.status[:uncontacted]  ) ,method: :put%></li>
+    <li><%= link_to "Invitation Sent" ,updatestatus_company_path(@company,status: Global.status[:invitesent]  ) ,method: :put%></li>
+    <li><%= link_to "Invitation Accepted" ,updatestatus_company_path(@company,status: Global.status[:inviteaccepted]  ) ,method: :put%></li>
+    <li><%= link_to "JAF Sent" ,updatestatus_company_path(@company,status: Global.status[:jafsent]  ) ,method: :put%></li>
+    <li><%= link_to "JAF Filled" ,updatestatus_company_path(@company,status: Global.status[:jaffilled]  ) ,method: :put%></li>
+    <li><%= link_to "PPT Scheduled" ,updatestatus_company_path(@company,status: Global.status[:pptset]  ) ,method: :put%></li>
+    <li><%= link_to "PPT Done" ,updatestatus_company_path(@company,status: Global.status[:pptdone]  ) ,method: :put%></li>
+    <li><%= link_to "Test Scheduled" ,updatestatus_company_path(@company,status: Global.status[:testset]  ) ,method: :put%></li>
+    <li><%= link_to "Test Completed" ,updatestatus_company_path(@company,status: Global.status[:testdone]  ) ,method: :put%></li>
+    <li><%= link_to "Rejected Invitation" ,updatestatus_company_path(@company,status: Global.status[:rejected]  ) ,method: :put%></li>
+    <li><%= link_to "No Vacancy" ,updatestatus_company_path(@company,status: Global.status[:novacancy]  ) ,method: :put%></li>
+    <li><%= link_to "Contact later" ,updatestatus_company_path(@company,status: Global.status[:contactlater]  ) ,method: :put%></li>
+    <li><%= link_to "Blacklisted" ,updatestatus_company_path(@company,status: Global.status[:blacklisted]  ) ,method: :put%></li>
   </ul>
 </div>
