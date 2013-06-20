@@ -55,6 +55,13 @@ class CompaniesController < ApplicationController
     @company.save
     redirect_to @company
   end
+
+  def updatedescription
+    @company=Company.find(params[:company][:id])
+    @company.description=params[:company][:description]
+    @company.save
+    redirect_to @company
+end
   def activity
     @company=Company.find(params[:id])
     @company.active=!@company.active

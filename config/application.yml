@@ -20,9 +20,8 @@ defaults: &defaults
     testdone: 90
     rejected: 100
     novacany: 110
-    contactlater:120
+    contactlater: 120
     blacklisted: 200
-
 development:
   <<: *defaults
 

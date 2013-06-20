@@ -1,10 +1,9 @@
 class Company < ActiveRecord::Base
-  attr_accessible :address, :identifier, :location, :name, :phone, :url, 
-                  :poc_name,:manager_name,:team_tokens
+  attr_accessible :address, :location, :name, :phone, :url, 
+                  :poc_name,:manager_name,:team_tokens, :description, :status
   
-  has_many :contacts
-
   attr_reader :team_tokens
+
   belongs_to :pointofcontact, 
   :class_name => 'User', 
   :foreign_key => 'poc_id'
@@ -38,7 +37,6 @@ class Company < ActiveRecord::Base
   end
 
   validates :name, presence: true , length: {minimum:2,maximum:100}
-  validates :identifier,uniqueness:true
   validates :address, presence: true , length: {minimum:2,maximum:100}
   validates :location, presence: true , length: {minimum:2,maximum:100}
   VALID_PHONE_REGEX = /\A\+?[0-9\-\s\(\)]*\z/
