@@ -4,6 +4,7 @@ Trackr::Application.routes.draw do
 
   resources :companies do
     put :activity, :on => :member
+    put :updateteams, :on => :member
     resources :contacts, :on => :member do
       get :show_modal, :on => :member
     end

@@ -1,9 +1,10 @@
 class Company < ActiveRecord::Base
   attr_accessible :address, :identifier, :location, :name, :phone, :url, 
-                  :poc_name,:manager_name
+                  :poc_name,:manager_name,:team_tokens
   
   has_many :contacts
 
+  attr_reader :team_tokens
   belongs_to :pointofcontact, 
   :class_name => 'User', 
   :foreign_key => 'poc_id'
@@ -32,6 +33,10 @@ class Company < ActiveRecord::Base
 
   has_and_belongs_to_many :teams
   
+  def team_tokens=(ids)
+    self.team_ids=ids.split(',')
+  end
+
   validates :name, presence: true , length: {minimum:2,maximum:100}
   validates :identifier,uniqueness:true
   validates :address, presence: true , length: {minimum:2,maximum:100}

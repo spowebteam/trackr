@@ -49,6 +49,12 @@ class CompaniesController < ApplicationController
       render 'edit'
     end
   end
+  def updateteams
+    @company=Company.find(params[:company][:id])
+    @company.team_tokens=params[:company][:team_tokens]
+    @company.save
+    redirect_to @company
+  end
   def activity
     @company=Company.find(params[:id])
     @company.active=!@company.active

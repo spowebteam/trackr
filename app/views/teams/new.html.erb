@@ -1,20 +1,31 @@
 <% provide(:title,'New Team') %>
 <div class="container">
   <div class="span6 offset3">
-    <%= form_for(@team) do |f| %>
-
-      <%= render 'shared/error_messages' %>
+    <%= form_for @team , html: { class: "form-horizontal"} do |f| %>
+      <%=render 'shared/error_messages' %>
+      <div class="control-group">
+        <%=f.label :name , class: "control-label" %>
+        <div class="controls">
+          <%=f.text_field :name %>
+        </div>
+      </div>
       
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+      <div class="control-group">
+        <%=f.label :description , class: "control-label"%>
+        <div class="controls">
+          <%=f.text_area :description %>
+        </div>
+      </div>
 
-      <%= f.label :description %>
-      <%= f.text_area :description %>
-
-      <%= f.label :user_tokens, "Members" %><br />  
-      <%= f.text_field :user_tokens %>
+      <div class="control-group">
+        <%= f.label :user_tokens, "Members" , class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :user_tokens, "data-pre" => 
+            @team.users.map(&:attributes).to_json %> 
+        </div>
+      </div>
       <hr />
-      <%= f.submit "Create New Team", class: "btn btn-large btn-primary" %>
-    <% end %>
+      <%= f.submit "Update",class:"btn btn-large btn-primary" %>
+  <% end %>
   </div>
 </div>

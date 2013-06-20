@@ -7,6 +7,21 @@ defaults: &defaults
     user: 100
     disabled: 127
     deleted: 128
+  status:
+    nocontact: 0
+    uncontacted: 10
+    invitesent: 20
+    inviteaccepted: 30
+    jafsent: 40
+    jaffilled: 50
+    pptset: 60
+    pptdone: 70
+    testset: 80
+    testdone: 90
+    rejected: 100
+    novacany: 110
+    contactlater:120
+    blacklisted: 200
 
 development:
   <<: *defaults
