@@ -1,0 +1,13 @@
+<div class="company-description-text">
+  <%= simple_format(@company.description) %>
+</div>
+<button class="btn btn-inverse" id="company-description-edit-button">
+  Edit Description
+</button>
+<%= form_for @company , 
+  :url => { :action => "updatedescription", :id => @company.id } , :html =>{class: "company-description-form" } do |g| %>
+  <%= g.text_area :description , class: "span12", rows: 3%>
+  <%= g.hidden_field :id %>
+  <%= g.submit "Update Description",class:"btn btn-primary pull-right" %>
+  <%= link_to "Cancel", "#" ,class: "btn btn-inverse", id: "company-description-cancel" %>
+<% end %> 

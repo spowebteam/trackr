@@ -1,0 +1,6 @@
+<%= form_for @company , :url => { :action => "updateteams", :id => @company.id } do |f| %>
+  <%= f.text_field :team_tokens, 
+  "data-pre" => @company.teams.map(&:attributes).to_json %>
+  <%= f.hidden_field :id %>
+  <%= f.submit "Save teams",class:"btn btn-primary pull-right" %>
+<% end %> 

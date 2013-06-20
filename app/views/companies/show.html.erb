@@ -47,30 +47,11 @@
         
         <div class="span3">
           <h4>Teams with access </h4>
-          <%= form_for @company , 
-            :url => { :action => "updateteams", :id => @company.id } do |f| %>
-            <%= f.text_field :team_tokens, 
-            "data-pre" => @company.teams.map(&:attributes).to_json %>
-            <%= f.hidden_field :id %>
-            <%= f.submit "Save teams",class:"btn btn-primary pull-right" %>
-          <% end %> 
+          <%= render 'companies/updateteam', object: @company%>
         </div>
         <span class="span9 ">
           <h4>About the company</h4>
-          <div class="company-description-text">
-            <%= simple_format(@company.description) %>
-          </div>
-          <button class="btn btn-inverse" id="company-description-edit-button">Edit Description</button>
-
-
-          <%= form_for @company , 
-            :url => { :action => "updatedescription", :id => @company.id } , :html =>{class: "company-description-form" } do |g| %>
-            <%= g.text_area :description , class: "span12", rows: 3%>
-            
-            <%= g.hidden_field :id %>
-           <%= g.submit "Update Description",class:"btn btn-primary pull-right" %>
-           <%= link_to "Cancel", "#" ,class: "btn btn-inverse", id: "company-description-cancel" %>
-          <% end %> 
+           <%= render 'companies/updatedescription', object: @company%>
         </span>
 
       </div>
