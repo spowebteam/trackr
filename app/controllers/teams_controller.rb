@@ -20,7 +20,7 @@ class TeamsController < ApplicationController
 
   def index
     @user = current_user
-    @teams=Team.all(include: :users)
+    @teams=Team.all(:include => :users)
     respond_to do |format|
       format.html
       format.json {render json: @teams}

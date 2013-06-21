@@ -5,43 +5,33 @@
     <tr>
       <td>Sl No.</td>
       <td>Team</td>
-      <td class="hidden-tablet hidden-mobile">Description</td>
+      <td class="hidden-phone hidden-mobile">Description</td>
       <td>Members</td>
     <tr>
   <thead>
   <tbody>
-  	<% @counter=0 %>
-    <% @team.each do |team| %>
+  	<% counter=1 %>
+    <% @teams.each do |team| %>
+    
     <tr>
       <td><%= counter %></td>
-      <td><%= team.name %></td>
-      <td class="hidden-tablet hidden-mobile"><%= team.description %></td>
+      <td><%= link_to team.name, team_path(team)  %></td>
+      <td class="hidden-phone hidden-mobile"><%= team.description %></td>
       <td>
       	<% userlist=[]  
-      	team.users.each do |user|
-      	   userlist << user.name
-      	 %>
-      	 <%= userlist.join(',') %>
-      </td>
+      	   team.users.each do |user|
+      	     userlist << user.name
+      	  %>
+      	 <%= link_to user.name , user_path(user) %> 
+      	 ,  
+      	 <%  end  %>
+     </td>
     </tr>
+    </a>
+    <% counter+=1 %>
+   <% end %>
   </tbody>
 </table>
 
-<% @teams.each do |team| %>
-<%= link_to(team) do %>
-<div class="span4 rounded">
-	<h4><%= team.name %></h4>
-	<p><%= team.description %> </p>
-	<strong>Members</strong>
-	<div>
-		<ul>
-		<% team.users.each do |user| %>
-		<li><%= user.name %></li>
-		<% end %>
-		</ul>
-	</div>
-</div>
-<% end %>
-<% end %>
 
 
