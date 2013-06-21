@@ -7,6 +7,13 @@ This file has user level numbers,
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
+    <li> <%= link_to "Edit user", edit_contact_path(contact) %></li>
+    <% if contact.deleted? %>
+      
+      <li> <%= link_to "Undelete user", activity_contact_path(contact,active: true), method: :put %></li>
+    <% else %>  
+      <li> <%= link_to "Delete user", activity_contact_path(contact,active: false), method: :put %></li>
+    <% end %>
     <% if current_user.superadmin?  %>
       <li><%= link_to "Permanently Delete User",contact,method: :delete, data: {confirm: "This will permanently delete the user, the action CANNOT be undone, are you sure ?"} %></li>
     <% end %>

@@ -3,11 +3,17 @@
 <span class="span12">
 <h1><%=@contact.name %>  <small><%= @contact.designation %></small></h1>
 <hr />
+<%= render 'contacts/contact_button', contact: @contact %>
+<hr/>
+<p>
+	Contact of <%= link_to @contact.company.name , @contact.company %>
+</p>
+
 <address>
-  <strong><%=@contact.email %></strong><br/>
-  <%= @contact.mobile %><br />
-  <%= @contact.landline %><br />
-  <%= simple_format(@contact.address) %>
+  Mail : <strong><%=@contact.email %></strong><br/>
+  Mobile : <%= @contact.mobile %><br />
+  Landline: <%= @contact.landline %><br />
+  Address : <br/> <%= simple_format(@contact.address) %>
 </address>
 </span>
 </div>
