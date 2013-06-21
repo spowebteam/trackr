@@ -1,8 +1,13 @@
 <% provide(:user,'None') %>
-<header class="navbar navbar-fixed-top">
+<header class="navbar navbar-fixed-top navbar-inverse">
     <div class="navbar-inner">
         <div class="container-fluid">
-          
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+            <div class="nav-collapse collapse">
             <nav>
                 <a class="brand" href="/">Trackr</a>
                 <ul class="nav pull-right">
@@ -10,10 +15,12 @@
                     <% if signed_in? %>
                           <% if current_user.admin? %>
                           <li><%= link_to "Teams",teams_path %></li>
+                          <li><%= link_to "Contacts",contacts_path %></li>
                           <% end %>
-                          <% if current_user.admin? %>
+                          
                           <li><%= link_to "Companies",companies_path %></li>
-                          <% end %>
+                        
+
                            <li><%= link_to "Users",users_path %></li>
                                 <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -33,6 +40,7 @@
                     <% end %>
                 </ul>
             </nav>
+          </div>
         </div>
     </div>
 </header>

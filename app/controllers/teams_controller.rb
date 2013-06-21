@@ -14,13 +14,13 @@ class TeamsController < ApplicationController
       redirect_to teams_path
     else
       flash[:error] = "Saving failed"
-      redirect_to request.referer
+      redirect_to goback
     end
   end
 
   def index
     @user = current_user
-    @teams=Team.all
+    @teams=Team.all(include: :users)
     respond_to do |format|
       format.html
       format.json {render json: @teams}
@@ -64,7 +64,7 @@ class TeamsController < ApplicationController
     def admin_user
      unless current_user.admin?
        flash[:error] = "Access Denied"
-       redirect_to request.referer
+       redirect_to goback
      end
     end
 end

@@ -1,5 +1,32 @@
 <% provide(:title,"Teams") %>
 <h1>Teams list</h1>
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr>
+      <td>Sl No.</td>
+      <td>Team</td>
+      <td class="hidden-tablet hidden-mobile">Description</td>
+      <td>Members</td>
+    <tr>
+  <thead>
+  <tbody>
+  	<% @counter=0 %>
+    <% @team.each do |team| %>
+    <tr>
+      <td><%= counter %></td>
+      <td><%= team.name %></td>
+      <td class="hidden-tablet hidden-mobile"><%= team.description %></td>
+      <td>
+      	<% userlist=[]  
+      	team.users.each do |user|
+      	   userlist << user.name
+      	 %>
+      	 <%= userlist.join(',') %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 <% @teams.each do |team| %>
 <%= link_to(team) do %>
 <div class="span4 rounded">

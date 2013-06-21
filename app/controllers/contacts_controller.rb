@@ -9,11 +9,11 @@ class ContactsController < ApplicationController
       can_view_else_redirect(@contact.company)
     elsif current_user.admin?
       flash[:error]="Access Denied"
-      redirect_to request.referrer
+      redirect_to goback
     end
     @contact.active=params[:active]
     @contact.save
-    redirect_to request.referrer
+    redirect_to goback
   end
 
   def index
@@ -24,7 +24,7 @@ class ContactsController < ApplicationController
         @contacts = Contact.paginate(page: params[:page]).includes(:company).where(:active => true)
       else
         flash[:error]="Access Denied"
-        redirect_to request.referrer
+        redirect_to goback
       end
     else
 
@@ -66,7 +66,10 @@ class ContactsController < ApplicationController
       @company = Company.find(@contact.company_id)
       can_view_else_redirect(@company)
     else
-      redirect_to request.referrer unless current_user.admin?
+      unless current_user.admin?
+        flash[:error] ="Access Denied"
+        redirect_to goback 
+      end
     end
     unless @contact
       flash[:error] = "Contact has left the building"
@@ -84,6 +87,14 @@ class ContactsController < ApplicationController
   def edit
     @contact = Contact.find(params[:id])
     @company = Company.find(@contact.company_id)
+    if (@company)
+      can_view_else_redirect(@company)
+    else
+      unless current_user.admin?
+        flash[:error] ="Access Denied"
+        redirect_to goback 
+      end
+    end
   end
 
   # POST /contacts
@@ -95,7 +106,7 @@ class ContactsController < ApplicationController
     end
     @company = Company.find(params[:company_id])
     @contact = @company.contacts.build(params[:contact])
-
+    can_view_else_redirect(@company)
     if @contact.save
       flash[:success] = "Contact added!"
       redirect_to @company
@@ -109,6 +120,7 @@ class ContactsController < ApplicationController
   def update
     @contact = Contact.find(params[:id])
     @company = Company.find(@contact.company_id)
+    can_view_else_redirect(@company)
     if @contact.default
       params[:contact][:default] = true
     end

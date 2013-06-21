@@ -45,11 +45,18 @@ module SessionsHelper
     if (company.teams & current_user.teams).empty?
       unless current_user.admin?
         flash[:error]="Access Denied"
-        redirect_to request.referer 
+        redirect_to goback 
       end
     end
   end
 
+  def goback
+    if request.referrer
+      request.referrer
+    else
+      root_path
+    end
+  end
   def admin_user
     redirect_to(root_path) unless current_user.admin?
   end
