@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
 	before_filter :signed_in_user, only: [:index,:show,:edit,:update,:destroy]
 
     #before_filter :correct_user, only: []
-  before_filter :admin_user, only: [:edit,:update,:destroy,:new]
+  before_filter :admin_user, only: [:destroy,:new,:create]
   
   autocomplete :user, :name, :full => true 
   def new
@@ -22,10 +22,12 @@ class CompaniesController < ApplicationController
   end
   def show
     @company=Company.find(params[:id])
+    can_view_else_redirect (@company)
     @default=@company.contacts.where(:default => true).where(:active => true).first
   end
   def edit
     @company=Company.find(params[:id])
+    can_view_else_redirect (@company)
   end
   def destroy
     Company.find(params[:id]).destroy
@@ -34,13 +36,22 @@ class CompaniesController < ApplicationController
   end
   def index
     @counterstart=1;
-    if current_user.admin?
+    if current_user.superadmin?
       @companies=Company.all
+    elsif current_user.admin?
+      @companies=Company.where(:active => true)
+    else
+      @companies=[]
+      @allcompanies=Company.where(:active => true).all(:include => :teams)
+      @allcompanies.each do |company|
+        @companies << company unless (company.teams & current_user.teams).empty?
+      end
     end
     
   end
   def update
     @company=Company.find(params[:id])
+    can_view_else_redirect (@company)
     if @company.update_attributes(params[:company])
         flash[:success]="Profile updated"
         #sign_in @user
@@ -51,12 +62,14 @@ class CompaniesController < ApplicationController
   end
   def updatestatus
     @company=Company.find(params[:id])
+    can_view_else_redirect (@company)
     @company.status=params[:status]
     @company.save
     redirect_to @company
   end
   def activity
     @company=Company.find(params[:id])
+    can_view_else_redirect (@company)
     @company.active=params[:active] if params[:active]
     @company.save
     redirect_to @company
