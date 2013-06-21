@@ -1,5 +1,5 @@
 <% provide(:title,"Teams") %>
-<h1>Teams list</h1>
+<h1>Teams list<% if current_user.admin?%><%=link_to "Add a new Team",new_team_path, class: "btn btn-inverse pull-right"%><%end%></h1>
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>
