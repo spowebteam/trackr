@@ -35,7 +35,13 @@
           <h5 class="heading">All contacts <small><%= link_to "Add Contact", new_company_contact_path(:company_id => @company.id),:class => "pull-right" %> </small></h5>
         <% @i=0 %>
         <% @company.contacts.each do |contact| %>
-           <% unless (contact.id == @default.id) || contact.deleted? %>
+           <% if @default 
+                did = @default.id
+              else
+                did = -1 #Non-existent id
+              end
+            %>
+           <% unless (contact.id == did) || contact.deleted? %>
              <%= link_to contact.name, show_modal_company_contact_path(:company_id => @company.id,:id => contact.id), {:remote => true, 'data-controls-modal' =>  "contact-modal",'data-toggle'=>'modal', 'data-target'=>'#contact-modal'} %>
            <% end %>
         <% end %>
