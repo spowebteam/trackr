@@ -8,7 +8,7 @@
     <%=   link_to "Delete" , activity_company_path(@company,active: false), method: :put %>
     <% if current_user.superadmin? %>
       <li class="divider"></li>
-      <li><%= link_to "Permanently Delete User",@company,method: :delete, data: {confirm: "This will permanently delete the user, the action CANNOT be undone, are you sure ?"} %></li>
+      <li><%= link_to "Permanently Delete Company",@company,method: :delete, data: {confirm: "This will permanently delete the company, the action CANNOT be undone, are you sure ?"} %></li>
     <% end %>
   </ul>
 </div>

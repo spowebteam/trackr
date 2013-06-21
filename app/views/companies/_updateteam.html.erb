@@ -1,4 +1,4 @@
-<%= form_for @company , :url => { :action => "updateteams", :id => @company.id } do |f| %>
+<%= form_for @company , :url => { :action => "update", :id => @company.id } do |f| %>
   <%= f.text_field :team_tokens, 
   "data-pre" => @company.teams.map(&:attributes).to_json %>
   <%= f.hidden_field :id %>

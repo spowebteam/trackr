@@ -49,19 +49,6 @@ class CompaniesController < ApplicationController
       render 'edit'
     end
   end
-  def updateteams
-    @company=Company.find(params[:company][:id])
-    @company.team_tokens=params[:company][:team_tokens]
-    @company.save
-    redirect_to @company
-  end
-
-  def updatedescription
-    @company=Company.find(params[:company][:id])
-    @company.description=params[:company][:description]
-    @company.save
-    redirect_to @company
-  end
   def updatestatus
     @company=Company.find(params[:id])
     @company.status=params[:status]
