@@ -1,23 +1,52 @@
-<%= form_for(@user) do |f| %>
+<%= form_for @user, :html => {:class => "form-horizontal span12"} do |f| %>
+  <fieldset>
   <%=render 'shared/error_messages' %>
 
-  <%=f.label :name %>
-  <%=f.text_field :name %>
+    <div class="control-group">
+      <%= f.label :name , :class =>"control-label"%>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
 
-  <%=f.label :email %>
-  <%=f.text_field :email %>
+    <div class="control-group">
+      <%=f.label :email, :class => "control-label" %>
+      <div class="controls">
+        <%=f.text_field :email %>
+      </div>
+    </div>
 
-  <%=f.label :phone %>
-  <%=f.text_field :phone %>
+    <div class="control-group">
+      <%=f.label :phone , :class => "control-label"%>
+      <div class="controls">
+        <%=f.text_field :phone %>
+      </div>
+    </div>
 
-  <%=f.label :identifier %>
-  <%=f.text_field :identifier %>
+    <div class="control-group">
+      <%=f.label :identifier, :class => "control-label" %>
+      <div class="controls">
+        <%=f.text_field :identifier %>
+      </div>
+    </div>
 
-  <%=f.label :password %>
-  <%=f.password_field :password %>
+    <div class="control-group">
+      <%=f.label :password, :class => "control-label" %>
+      <div class="controls">
+        <%=f.password_field :password %>
+      </div>
+    </div>
 
-  <%=f.label :password_confirmation %>
-  <%=f.password_field :password_confirmation %>
-  <hr />
-  <%= f.submit "Update",class:"btn btn-large btn-primary" %>
+    <div class="control-group">
+      <%=f.label :password_confirmation, :class => "control-label" %>
+      <div class="controls">
+        <%=f.password_field :password_confirmation %>
+      </div>
+    </div>
+    <hr />
+    <div class="controls">
+      <%= f.submit "Update",class:"btn btn-primary" %>
+      <%= link_to "Back", request.referrer, class:"btn btn-inverse" %>
+    </div>
+  </fieldset>
 <% end %>
