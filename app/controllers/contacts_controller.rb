@@ -1,10 +1,16 @@
 class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
-  before_filter :admin_user
+  before_filter :admin_user, only: [:index,:destroy,]
   
   def activity
     @contact=Contact.find(params[:id])
+    if @contact.company
+      can_view_else_redirect(@contact.company)
+    elsif current_user.admin?
+      flash[:error]="Access Denied"
+      redirect_to request.referrer
+    end
     @contact.active=params[:active]
     @contact.save
     redirect_to request.referrer
@@ -14,11 +20,16 @@ class ContactsController < ApplicationController
     if params[:company_id] == nil
       if current_user.superadmin?
         @contacts = Contact.paginate(page: params[:page]).includes(:company)
-      else
+      elsif current_user.admin?
         @contacts = Contact.paginate(page: params[:page]).includes(:company).where(:active => true)
+      else
+        flash[:error]="Access Denied"
+        redirect_to request.referrer
       end
-    else 
+    else
+
       @company = Company.find(params[:company_id])
+      can_view_else_redirect(@company)
       @contacts = @company.contacts.where(:active => true)
     end
     respond_to do |format|
@@ -32,7 +43,9 @@ class ContactsController < ApplicationController
       flash[:error] = "Cannot create contact without company"
       redirect_to root_path
     else
+
       @company = Company.find(params[:company_id])
+      can_view_else_redirect(@company)
       @contact = @company.contacts.new
 
       respond_to do |format|
@@ -44,12 +57,16 @@ class ContactsController < ApplicationController
 
   def show_modal
     @company = Company.find(params[:company_id])
+    can_view_else_redirect(@company)
     @contact = Contact.find(params[:id])
   end
   def show
     @contact = Contact.find(params[:id])
     if @contact.company_id
       @company = Company.find(@contact.company_id)
+      can_view_else_redirect(@company)
+    else
+      redirect_to request.referrer unless current_user.admin?
     end
     unless @contact
       flash[:error] = "Contact has left the building"
