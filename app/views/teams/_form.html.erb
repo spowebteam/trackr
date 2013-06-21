@@ -1,0 +1,40 @@
+<%= form_for @team , html: { class: "form-horizontal span4"} do |f| %>
+  <fieldset>
+    <legend>
+      <%=
+        if @team.id
+          "Edit #{@team.name} details"
+        else
+          "Create a new team"
+        end
+      %>
+    </legend>
+    <%=render 'shared/error_messages' %>
+    <div class="control-group">
+      <%=f.label :name , class: "control-label" %>
+      <div class="controls">
+        <%=f.text_field :name %>
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <%=f.label :description , class: "control-label"%>
+      <div class="controls">
+        <%=f.text_area :description, rows: 4 %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :user_tokens, "Members" , class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :user_tokens, "data-pre" => 
+          @team.users.map(&:attributes).to_json, class: "span3" %> 
+      </div>
+    </div>
+    <hr />
+    <div class="controls">
+      <%= f.submit "Update",class:"btn btn-primary" %>
+      <%= link_to "Back", request.referer, class: "btn btn-inverse" %>
+    </div>
+  </fieldset>
+<% end %>
