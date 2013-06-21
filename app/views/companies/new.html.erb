@@ -1,29 +1,6 @@
 <% provide(:title,'Add a Company') %>
 <div class="row pagination-centered">
   <div class="span12">
-    <%= form_for(@company) do |f| %>
-
-      <%= render 'shared/error_company_messages' %>
-      
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-
-      <%= f.label :location %>
-      <%= f.text_field :location %>
-      <%= f.label :address %>
-      <%= f.text_area :address %>
-
-      <%= f.label :url %>
-      <%= f.text_field :url %>
-
-
-      <%= f.label :phone %>
-      <%= f.text_field :phone %>
-
-      <%= f.label :identifier %>
-      <%= f.text_field :identifier %>
-      <hr/>
-      <%= f.submit "Create Company", class: "btn btn-large btn-primary" %>
-    <% end %>
+    <%= render 'companies/form' , object: @company %>
   </div>
 </div> <!-- /container -->

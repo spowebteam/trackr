@@ -1,32 +1,6 @@
 <% provide(:title,'Update the company profile') %>
 <div class="row pagination-centered">
   <div class="span12">
-    <%= form_for(@company) do |f| %>
-
-      <%= render 'shared/error_company_messages' %>
-      
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-
-      <%= f.label :location %>
-      <%= f.text_field :location %>
-      <%= f.label :address %>
-      <%= f.text_area :address %>
-
-      <%= f.label :url %>s
-      <%= f.text_field :url %>
-
-
-      <%= f.label :phone %>
-      <%= f.text_field :phone %>
-
-      <%= f.label :point_of_contact %>
-      <%= f.autocomplete_field :poc_name, autocomplete_user_name_companies_path %>
-
-      <%= f.label :Manager %>
-      <%= f.autocomplete_field :manager_name, autocomplete_user_name_companies_path %>
-      <hr/>
-      <%= f.submit "Update", class: "btn btn-large btn-primary" %>
-    <% end %>
+    <%= render 'companies/form' , object: @company %>
   </div>
 </div> <!-- /container -->

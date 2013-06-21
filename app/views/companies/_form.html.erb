@@ -1,0 +1,68 @@
+<%= form_for @company , html: {class: "form-horizontal span4"} do |f|  %>
+  <fieldset>
+    <legend>
+    <%= 
+      if @company.id 
+        "Editing #{@company.name} details"
+      else
+        "Adding new company"
+      end
+    %>
+    </legend>
+    <%= render 'shared/error_company_messages' %>
+    <div class="control-group">
+      <%= f.label :name , class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :location , class: "control-label"  %>
+      <div class="controls">
+        <%= f.text_field :location %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :address, class: "control-label"  %>
+      <div class="controls">
+        <%= f.text_area :address , rows: 4%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :url , class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :url %>
+      </div> 
+    </div> 
+
+    <div class="control-group">
+      <%= f.label :phone, class: "control-label"  %>
+      <div class="controls">
+        <%= f.text_field :phone %>
+      </div> 
+    </div> 
+
+    <div class="control-group">
+      <%= f.label :point_of_contact , class: "control-label" %>
+      <div class="controls">
+        <%= f.autocomplete_field :poc_name, autocomplete_user_name_companies_path %>
+      </div> 
+    </div> 
+
+
+    <div class="control-group">
+      <%= f.label :Manager , class: "control-label" %>
+      <div class="controls">
+        <%= f.autocomplete_field :manager_name, autocomplete_user_name_companies_path %>
+      </div>
+    </div>
+    <hr/>
+    <div class="controls">
+      <%= f.submit "Update", class: "btn btn-primary" %>
+      <%= link_to "Edit", request.referer, class: "btn btn-inverse" %>
+    </div>
+  </fieldset>
+<% end %>
