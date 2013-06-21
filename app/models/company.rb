@@ -38,7 +38,8 @@ class Company < ActiveRecord::Base
   end
 
   before_create :set_status
-
+  before_create :set_active
+  
   def status_text
     code=self.status
     keys=Global.status
@@ -66,7 +67,7 @@ class Company < ActiveRecord::Base
     elsif code <= keys[:testdone]
       "Test Completed"
     elsif code <= keys[:rejected]
-      "Reject Invitation"
+      "Rejected Invitation"
     elsif code <= keys[:novacany]
       "No Vacany"
     elsif code <= keys[:contactlater]
@@ -79,6 +80,15 @@ class Company < ActiveRecord::Base
   def set_status
     self.status = Global.level[:nocontact]
   end
+
+  def set_inactive
+    self.active=false
+  end
+
+  def set_active
+    self.active=true
+  end
+
   validates :name, presence: true , length: {minimum:2,maximum:100}
   validates :address, presence: true , length: {minimum:2,maximum:100}
   validates :location, presence: true , length: {minimum:2,maximum:100}

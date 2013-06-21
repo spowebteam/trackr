@@ -1,0 +1,14 @@
+<div class="btn-group">
+  <%= link_to "Edit" , edit_company_path(@company), class: "btn btn-primary" %>
+  <a class="btn dropdown-toggle " data-toggle="dropdown" href="#">
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu " >
+    <%=   link_to "Undelete" , activity_company_path(@company,active: true), method: :put %>
+    <%=   link_to "Delete" , activity_company_path(@company,active: false), method: :put %>
+    <% if current_user.superadmin? %>
+      <li class="divider"></li>
+      <li><%= link_to "Permanently Delete User",@company,method: :delete, data: {confirm: "This will permanently delete the user, the action CANNOT be undone, are you sure ?"} %></li>
+    <% end %>
+  </ul>
+</div>

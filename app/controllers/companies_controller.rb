@@ -70,7 +70,7 @@ class CompaniesController < ApplicationController
   end
   def activity
     @company=Company.find(params[:id])
-    @company.active=!@company.active
+    @company.active=params[:active] if params[:active]
     @company.save
     redirect_to @company
   end
