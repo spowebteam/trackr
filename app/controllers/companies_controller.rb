@@ -22,7 +22,7 @@ class CompaniesController < ApplicationController
   end
   def show
     @company=Company.find(params[:id])
-    @default=@company.contacts.where(:default => true).first
+    @default=@company.contacts.where(:default => true).where(:active => true).first
   end
   def edit
     @company=Company.find(params[:id])

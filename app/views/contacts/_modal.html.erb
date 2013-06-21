@@ -17,4 +17,5 @@
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     <%= link_to "Edit" , edit_company_contact_path(@company, @contact), class: "btn btn-primary", data: {company_id: @contact.company.id} %>
+    <%= link_to "Delete", activity_contact_path(@contact,active: false), class:"btn btn-danger" , method: :put %>
   </div>

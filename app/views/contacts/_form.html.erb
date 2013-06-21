@@ -50,25 +50,17 @@
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :default , :class =>"control-label"%>
+      <%= f.label :default , "Display full ?", :class =>"control-label"%>
       <div class="controls">
-        <% if @company.contacts.empty? %>
-          <%= f.check_box :default ,:disabled => "disabled", :checked => "checked" %>
-        <% elsif @contact.default %>
-          <%= f.check_box :default ,:disabled => "disabled", :checked => "checked" %>
-          <span class="help-block">
-            If you need to change default, edit the other user, every company has to have one default contact. 
-          </span>
-        <% else %>
-          <%= f.check_box :default %>
-          <span class="help-block">
-            Default already set, checking will change it.
-          </span>
-        <% end %>
+        <%= f.check_box :default %>
       </div>
     </div>
     <div class="controls">
-      <%= f.submit "Update", class: "btn btn-primary" %>
+      <% if @contact.id %>
+        <%= f.submit "Update", class: "btn btn-primary" %>
+      <% else %>
+        <%= f.submit "Add Contact", class: "btn btn-primary" %>
+      <% end %>
       <%= link_to "Back", @company,class: "btn btn-inverse" %>
     </div>
   </fieldset>

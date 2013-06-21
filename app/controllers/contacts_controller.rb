@@ -3,12 +3,23 @@ class ContactsController < ApplicationController
   # GET /contacts.json
   before_filter :correct_user
   
+  def activity
+    @contact=Contact.find(params[:id])
+    @contact.active=params[:active]
+    @contact.save
+    redirect_to request.referrer
+  end
+
   def index
     if params[:company_id] == nil
-      @contacts = Contact.paginate(page: params[:page]).includes(:company)
+      if current_user.superadmin?
+        @contacts = Contact.paginate(page: params[:page]).includes(:company)
+      else
+        @contacts = Contact.paginate(page: params[:page]).includes(:company).where(:active => true)
+      end
     else 
       @company = Company.find(params[:company_id])
-      @contacts = @company.contacts.all
+      @contacts = @company.contacts.where(:active => true)
     end
     respond_to do |format|
       format.html # /

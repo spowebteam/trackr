@@ -2,6 +2,9 @@
 
 <% provide(:title,"Companies") %>
 <h1>Companies list<br/><small><% if current_user.admin?%><%=link_to "Add a new Company",new_company_path%><%end%></small></h1>
+
+
+
 <% @companies.each do |company| %>
 <%= link_to(company) do %>
 <div class="span4 rounded">
