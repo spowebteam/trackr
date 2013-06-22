@@ -1,0 +1,21 @@
+<%= form_for @log, :html => { class: "form-horizontal"} do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+   <legend> Editing log details </legend>
+  	<div class="control-group">
+  		<div class="controls">
+    <%= f.text_area :content, placeholder: "Compose new micropost..." ,rows: 4%>
+    	</div>
+    </div>
+  <div class="control-group">
+  	<%= f.label :contact_id ,class: "control-label"%>
+  	<div class="controls">
+  		<%= select("log", :contact_id, @contacts.collect {|c| [ c.name, c.id ] }, {:include_blank => 'None'}) %>
+  		<%= f.hidden_field :company_id , value: @company.id %>
+  		<%= f.hidden_field :user_id , value: current_user.id%>
+  	</div>
+  </div>
+  <div class="controls">
+  	<%= f.submit "Add log", class: "btn btn btn-primary" %>
+  	<%= link_to "Cancel","#",class: "btn btn-inverse pull-right", id: "log-entry-cancel" %>
+  </div>
+<% end %>

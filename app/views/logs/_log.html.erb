@@ -15,4 +15,7 @@
          <%=" #{log.created_at} ( #{time_ago_in_words(log.created_at)})" %>
   </span> 
   <span class="content"><%= log.content %></span>
+  <p>
+  <%= link_to "Edit" , edit_log_path(log) %>
+  <%= link_to "Delete",log,method: :delete, data: {confirm: "This will permanently delete the log, the action CANNOT be undone, are you sure ?"} %>
 </li>

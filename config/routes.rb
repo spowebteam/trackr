@@ -10,7 +10,7 @@ Trackr::Application.routes.draw do
     resources :contacts, :on => :member do
       get :show_modal, :on => :member
     end
-    resources :logs, only: [:create, :destroy, :update]
+    resources :logs, only: [:create, :destroy, :update, :edit]
     get :autocomplete_user_name, :on => :collection
   end
   resources :users do
@@ -25,7 +25,7 @@ Trackr::Application.routes.draw do
     put :activity, :on => :member
   end
 
-  resources :logs, only: [:create, :destroy, :update]
+  resources :logs, only: [:create, :destroy, :update, :edit]
 
   
   resources :sessions, only: [:new, :create, :destroy]
