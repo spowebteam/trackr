@@ -23,7 +23,10 @@ class CompaniesController < ApplicationController
   def show
     @company=Company.find(params[:id])
     can_view_else_redirect (@company)
+    @contacts=@company.contacts.where(:active => true)
     @default=@company.contacts.where(:default => true).where(:active => true).first
+    @logs=@company.logs.paginate(page: params[:page])
+    @newlog=@company.logs.build
   end
   def edit
     @company=Company.find(params[:id])

@@ -15,6 +15,7 @@ class Company < ActiveRecord::Base
   
   has_many :contacts
 
+  has_many :logs
   def poc_name
     pointofcontact.try(:name)
   end

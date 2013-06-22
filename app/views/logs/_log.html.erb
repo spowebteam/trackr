@@ -1,0 +1,18 @@
+<li>
+  <span class="timestamp"> <%= "Log of exchange between"    %>
+  		 <%= if log.user_id && User.find(log.user_id)   
+  		       User.find(log.user_id).name  
+  		     else
+  		       "SPO"
+  		     end                          %>
+  		     and
+  		 <%= if log.contact_id && Contact.find(log.contact_id)
+  		 		Contact.find(log.contact_id).name
+  		 	 else
+  		 	   "Company"
+  		 	 end                          %>					 
+             that happened on 
+         <%=" #{log.created_at} ( #{time_ago_in_words(log.created_at)})" %>
+  </span> 
+  <span class="content"><%= log.content %></span>
+</li>

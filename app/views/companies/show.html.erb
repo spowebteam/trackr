@@ -74,28 +74,22 @@
 
       </div>
       <hr />
-      <div class="row-fluid row-fluid-1">
-        <span class="span6">
-          <h3 class="heading">Contact Log&nbsp;</h3>
-        </span>
-        <span class="span6">
-          <button class="btn btn-primary pull-right">Add &nbsp;log entry +</button>
+      <div class="row-fluid ">
+        
+        <span class="span6 pull6">
+          <%= render 'companies/newlog' , object: { @company => @company, @newlog => @newlog, @contacts => @contacts } %>
         </span>
       </div>
       <div class="row-fluid">
         <span class="span12">
-          <div class="row-fluid">
-            <span class="span12">
-              <p>Contacted Ms. Amrita Singh by Abhimanyu at 3:52 PM March 12 (3 days ago)</p>
-              <a class="dom-link pull-right" href="#">Edit</a>
-              <span class="label label-success">Positive</span>
-            </span>
-          </div>
-          <div class="row-fluid">
-        <span class="span12">Lorem ipsum In cupidatat ullamco tempor nisi sint eu dolor amet sint exercitation non elit tempor et ullamco occaecat esse nulla non tempor sint eiusmod elit consequat id in proident dolor irure nostrud est nisi cupidatat non laborum nisi laboris ut culpa labore in in mollit est sit quis non enim sed eu labore dolore ullamco mollit dolore laboris non ea minim Ut Duis anim cupidatat elit ad aliquip veniam sed adipisicing cillum in irure et id nisi dolor nisi fugiat dolor deserunt cupidatat reprehenderit anim nulla laborum consequat occaecat cillum pariatur est Ut consequat sint nostrud cillum dolore voluptate laborum dolor ea incididunt cillum magna officia et sed velit occaecat pariatur cupidatat do ut nostrud aliqua dolore id enim Ut sint dolor incididunt non consequat pariatur Excepteur minim cillum laborum occaecat ullamco laborum nulla aliquip nisi pariatur nulla dolor id dolor ad culpa dolore commodo.</span>
-        </div>
+        <% if @company.logs.any? %>
+          <ol class="logs">
+            <%= render @logs %>
+          </ol>
+        <%= will_paginate @logs %>
+        <% end %>
         </span>
-      </div>
+      </div>   
       
     </div>
 <div class="modal hide fade" id="contact-modal">
