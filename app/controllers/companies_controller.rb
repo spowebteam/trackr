@@ -25,7 +25,7 @@ class CompaniesController < ApplicationController
     can_view_else_redirect (@company)
     @contacts=@company.contacts.where(:active => true)
     @default=@company.contacts.where(:default => true).where(:active => true).first
-    @logs=@company.logs.paginate(page: params[:page])
+    @logs=@company.logs.order("created_at DESC").paginate(page: params[:page])
     @newlog=@company.logs.build
   end
   def edit
