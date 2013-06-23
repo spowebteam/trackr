@@ -1,9 +1,10 @@
 <div class="company-description-text">
   <%= simple_format(@company.description) %>
-</div>
+
 <button class="btn btn-inverse" id="company-description-edit-button">
   Edit Description
 </button>
+</div>
 <%= form_for @company , 
   :url => { :action => "update", :id => @company.id } , :html =>{class: "company-description-form" } do |g| %>
   <%= g.text_area :description , class: "span12", rows: 3%>

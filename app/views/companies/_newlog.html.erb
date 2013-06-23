@@ -1,13 +1,13 @@
-<div>
+<div class="span12">
 	<h3 class="heading">Contact Log<button class="btn btn-primary btn-inverse pull-right" id="log-entry-button">New log entry</button></h3>
 
-<div>
-<%= form_for @newlog, :html => { id: "log-entry-form", class: "form-horizontal"} do |f| %>
+
+<%= form_for @newlog, :html => { id: "log-entry-form", class: "form-horizontal span12 "} do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
   	<div class="control-group">
-  		<div class="controls">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." ,rows: 4%>
-    	</div>
+  		
+    <%= f.text_area :content, placeholder: "Add new conversation" ,rows: 4, class:"span12"%>
+    	
     </div>
   <div class="control-group">
   	<%= f.label :contact_id ,class: "control-label"%>
@@ -22,6 +22,6 @@
   	<%= link_to "Cancel","#",class: "btn btn-inverse pull-right", id: "log-entry-cancel" %>
   </div>
 <% end %>
-
-
+<hr />
+</div>
 

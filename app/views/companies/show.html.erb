@@ -1,7 +1,9 @@
 <% provide(:title,@company.name) %>
 <div class="container-fluid">
-  <div class="row-fluid">
-    <span class="span6">
+  <div class="row-fluid span12">
+  <div class="span4">
+    <!-- Heeader with company details -->
+    <span class="span12">
       <h1 class="heading">
         <%= @company.name %>
         <%= render 'companies/editbutton', object: @company %>
@@ -15,11 +17,20 @@
           <p><%= @company.address %></p>
       </div> 
       <div>
-         <p>Point of Contact :<%= link_to @company.pointofcontact.name, @company.pointofcontact %></p>
-         <p>Managed by <%= link_to @company.manager.name, @company.manager %>
+          <p>Point of Contact :
+            <%= if @company.pointofcontact  
+                  link_to @company.pointofcontact.name, @company.pointofcontact 
+                end
+            %></p>
+          <p>Managed by : 
+            <%= if @company.manager 
+                  link_to @company.manager.name, @company.manager 
+                end
+            %></p>
       </div> 
     </span>
-    <span class="span6">
+    <!-- Contact Details -->
+    <span class="span12">
       <% unless @company.contacts.empty? %>
         <h4 class="heading">Contact</h4>
         <p>
@@ -51,47 +62,36 @@
           <%= link_to "Add Contact", new_company_contact_path(:company_id => @company.id),:class => "btn btn-inverse" %> 
         </div>
       <% end %>
-
       <br/>
-      
-      
     </span>
     
+    <hr />
+    <div class="span12">
+        <h4>Teams with access </h4>
+        <%= render 'companies/updateteam', object: @company%>
+    </div>
   </div>
-  <hr />
-   
-      </div>
-      <div class="row-fluid">
-        
-        <div class="span3">
-          <h4>Teams with access </h4>
-          <%= render 'companies/updateteam', object: @company%>
-        </div>
-        <span class="span9 ">
-          <h4>About the company</h4>
-           <%= render 'companies/updatedescription', object: @company%>
-        </span>
-
-      </div>
-      <hr />
-      <div class="row-fluid ">
-        
-        <span class="span6 pull6">
-          <%= render 'companies/newlog' , object: { @company => @company, @newlog => @newlog, @contacts => @contacts } %>
-        </span>
-      </div>
-      <div class="row-fluid">
-        <span class="span12">
-        <% if @company.logs.any? %>
-          <ol class="logs">
+  <div class="span8">
+    <div class="span12 ">
+      <h4>About the company</h4>
+        <%= render 'companies/updatedescription', object: @company%>
+    </div>
+    <hr />
+    <div class="span12">
+      <%= render 'companies/newlog' , object: { @company => @company, @newlog => @newlog, @contacts => @contacts } %>
+    </div>
+    <div class="span12">
+      <% if @company.logs.any? %>
+          <div class="logs span12">
             <%= render @logs %>
-          </ol>
+          </div>
         <%= will_paginate @logs %>
         <% end %>
-        </span>
-      </div>   
+    </div>   
       
-    </div>
+  </div>
+  </div>
+</div>
 <div class="modal hide fade" id="contact-modal">
   <div class="modal-header">
     <a href="#" class="close">×</a>
@@ -101,5 +101,7 @@
       <%= image_tag "loading.gif" %>
   </div>
   <div class="modal-footer">&nbsp;</div>
+
 </div>
+
 

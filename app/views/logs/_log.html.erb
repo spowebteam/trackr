@@ -1,21 +1,25 @@
-<li>
-  <span class="timestamp"> <%= "Log of exchange between"    %>
-  		 <%= if log.user_id && User.find(log.user_id)   
+<div class="logentry">
+  <strong> 		  
+        <%= if log.user_id && User.find(log.user_id)   
   		       User.find(log.user_id).name  
   		     else
   		       "SPO"
-  		     end                          %>
+  		     end
+                                     %>
+  </strong>                                   
   		     and
+  <strong>
   		 <%= if log.contact_id && Contact.find(log.contact_id)
   		 		Contact.find(log.contact_id).name
   		 	 else
   		 	   "Company"
-  		 	 end                          %>					 
-             that happened on 
+  		 	 end                          %>	
+  </strong>				 
+              
+  <div class="timestamp pull-right"> 
          <%=" #{log.created_at} ( #{time_ago_in_words(log.created_at)})" %>
-  </span> 
-  <span class="content"><%= log.content %></span>
-  <p>
+  </div> 
+  <div class="content"><%= log.content %></div>
   <%= link_to "Edit" , edit_log_path(log) %>
   <%= link_to "Delete",log,method: :delete, data: {confirm: "This will permanently delete the log, the action CANNOT be undone, are you sure ?"} %>
-</li>
+</div>
