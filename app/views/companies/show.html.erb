@@ -3,7 +3,7 @@
   <div class="row-fluid span12">
   <div class="span4">
     <!-- Heeader with company details -->
-    <span class="span12">
+    <div class="span12">
       <h1 class="heading">
         <%= @company.name %>
         <%= render 'companies/editbutton', object: @company %>
@@ -28,9 +28,9 @@
                 end
             %></p>
       </div> 
-    </span>
+    </div>
     <!-- Contact Details -->
-    <span class="span12">
+    <div class="span12">
       <% unless @company.contacts.empty? %>
         <h4 class="heading">Contact</h4>
         <p>
@@ -63,7 +63,7 @@
         </div>
       <% end %>
       <br/>
-    </span>
+    </div>
     
     <hr />
     <div class="span12">
@@ -72,7 +72,7 @@
     </div>
   </div>
   <div class="span8">
-    <div class="span12 ">
+    <div class="span12">
       <h4>About the company</h4>
         <%= render 'companies/updatedescription', object: @company%>
     </div>
@@ -80,9 +80,9 @@
     <div class="span12">
       <%= render 'companies/newlog' , object: { @company => @company, @newlog => @newlog, @contacts => @contacts } %>
     </div>
-    <div class="span12">
+    <div class="span12 pull-left">
       <% if @company.logs.any? %>
-          <div class="logs span12">
+          <div class="span12">
             <%= render @logs %>
           </div>
         <%= will_paginate @logs %>

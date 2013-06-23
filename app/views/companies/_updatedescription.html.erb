@@ -5,10 +5,12 @@
   Edit Description
 </button>
 </div>
+<div class="company-description-form">
 <%= form_for @company , 
-  :url => { :action => "update", :id => @company.id } , :html =>{class: "company-description-form" } do |g| %>
+  :url => { :action => "update", :id => @company.id }   do |g| %>
   <%= g.text_area :description , class: "span12", rows: 3%>
   <%= g.hidden_field :id %>
   <%= g.submit "Update Description",class:"btn btn-primary pull-right" %>
   <%= link_to "Cancel", "#" ,class: "btn btn-inverse", id: "company-description-cancel" %>
 <% end %> 
+</div>
