@@ -1,8 +1,8 @@
-<div class="span12 pull-left">
-	<h3 class="heading">Contact Log<button class="btn btn-primary btn-inverse pull-right" id="log-entry-button ">New log entry</button></h3>
+<div>
+	<h3 class="heading">Contact Log<button class="btn btn-primary btn-success pull-right" id="log-entry-button">New log entry</button></h3>
 
-</div>
-<div class="span12">
+
+
 
 <%= form_for @newlog, :html => { id: "log-entry-form", class: "form-horizontal"} do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
@@ -24,6 +24,6 @@
   	<%= link_to "Cancel","#",class: "btn btn-inverse pull-right", id: "log-entry-cancel" %>
   </div>
 <% end %>
-<hr />
 </div>
+<hr />
 

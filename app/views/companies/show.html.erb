@@ -1,7 +1,7 @@
 <% provide(:title,@company.name) %>
 <div class="container-fluid">
   <div class="row-fluid span12">
-  <div class="span4">
+  <div class="span4" id="section1">
     <!-- Heeader with company details -->
     <div class="span12">
       <h1 class="heading">
@@ -27,10 +27,12 @@
                   link_to @company.manager.name, @company.manager 
                 end
             %></p>
-      </div> 
+      </div>
+      <hr /> 
     </div>
+
     <!-- Contact Details -->
-    <div class="span12">
+    <div>
       <% unless @company.contacts.empty? %>
         <h4 class="heading">Contact</h4>
         <p>
@@ -66,7 +68,7 @@
     </div>
     
     <hr />
-    <div class="span12">
+    <div>
         <h4>Teams with access </h4>
         <%= render 'companies/updateteam', object: @company%>
     </div>
@@ -77,12 +79,12 @@
         <%= render 'companies/updatedescription', object: @company%>
     </div>
     <hr />
-    <div class="span12">
+    <div>
       <%= render 'companies/newlog' , object: { @company => @company, @newlog => @newlog, @contacts => @contacts } %>
     </div>
-    <div class="span12 pull-left">
+    <div>
       <% if @company.logs.any? %>
-          <div class="span12">
+          <div class="logs">
             <%= render @logs %>
           </div>
         <%= will_paginate @logs %>
