@@ -1,4 +1,4 @@
-root = "/home/guru/apps/blog/trackr"
+root = "/home/guru/apps/trackr"
 working_directory root
 pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"
