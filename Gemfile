@@ -11,9 +11,8 @@ gem 'rails3-jquery-autocomplete'
 gem 'capistrano'
 gem 'unicorn'
 
-group :production do
-  gem 'pg'
-end
+gem 'mysql2'
+
 
 
 group :development, :test do
