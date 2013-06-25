@@ -52,13 +52,20 @@
       </div> 
     </div> 
 
-
     <div class="control-group">
       <%= f.label :Manager , class: "control-label" %>
       <div class="controls">
         <%= f.autocomplete_field :manager_name, autocomplete_user_name_companies_path %>
       </div>
     </div>
+    <% if @company.id %>
+    <div class="control-group">
+    <%= f.label :default_contact_id ,class: "control-label"%>
+    <div class="controls">
+      <%= select("log", :default_contact_id, @contacts.collect {|c| [ c.name, c.id ] }, {:include_blank => 'None'}) %>
+    </div>
+    <% end %>
+  </div>
     <hr/>
     <div class="controls">
       <%= f.submit "Update", class: "btn btn-primary" %>

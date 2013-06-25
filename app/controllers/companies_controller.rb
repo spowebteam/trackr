@@ -24,12 +24,13 @@ class CompaniesController < ApplicationController
     @company=Company.find(params[:id])
     can_view_else_redirect (@company)
     @contacts=@company.contacts
-    @default=@company.contacts.where(:default => true).where(:active => true).first
+    @default=@company.default_contact
     @logs=@company.logs.order("created_at DESC").paginate(page: params[:page])
     @newlog=@company.logs.build
   end
   def edit
     @company=Company.find(params[:id])
+    @contacts=@company.contacts.where(:active => true)
     can_view_else_redirect (@company)
   end
   def destroy

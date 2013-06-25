@@ -1,13 +1,13 @@
 class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
-  before_filter :admin_user, only: [:index,:destroy,]
+  before_filter :admin_user, only: [:destroy]
   
   def activity
     @contact=Contact.find(params[:id])
     if @contact.company
       can_view_else_redirect(@contact.company)
-    elsif current_user.admin?
+    elsif !(current_user.admin?)
       flash[:error]="Access Denied"
       redirect_to goback
     end
@@ -17,7 +17,7 @@ class ContactsController < ApplicationController
   end
 
   def index
-    if params[:company_id] == nil
+    if params[:company_id].nil?
       if current_user.superadmin?
         @contacts = Contact.paginate(page: params[:page]).includes(:company)
       elsif current_user.admin?
@@ -30,7 +30,11 @@ class ContactsController < ApplicationController
 
       @company = Company.find(params[:company_id])
       can_view_else_redirect(@company)
-      @contacts = @company.contacts.where(:active => true)
+      if current_user.superadmin?
+        @contacts = @company.contacts
+      else
+        @contacts = @company.contacts.where(:active => true)
+      end
     end
     respond_to do |format|
       format.html # /
@@ -100,7 +104,7 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    unless params[:company_id] then
+    if params[:company_id].nil?
       flash[:error] = "Cannot create contact without company"
       redirect_to root_path
     end
@@ -121,9 +125,6 @@ class ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
     @company = Company.find(@contact.company_id)
     can_view_else_redirect(@company)
-    if @contact.default
-      params[:contact][:default] = true
-    end
     respond_to do |format|
       if @contact.update_attributes(params[:contact])
         #if reset_default then

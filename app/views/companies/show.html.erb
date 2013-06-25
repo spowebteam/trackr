@@ -36,26 +36,20 @@
       <% unless @company.contacts.empty? %>
         <h4 class="heading">Contact</h4>
         <p>
-          <% if @default %>
+          <% if @default && @default.active %>
             <strong><%= link_to @default.name, show_modal_company_contact_path(:company_id => @company.id,:id => @default.id), {:remote => true, 'data-controls-modal' =>  "contact-modal",'data-toggle'=>'modal', 'data-target'=>'#contact-modal'} %></strong>
             <%= "(#{@default.designation})" %> 
             <span class="badge badge-info pull-right">Default</span>
           <br><tel><%= "(M) #{@default.mobile}, (Off) #{@default.landline}" %>
           <br><a href='mailto:<%=@default.email%>'><%= @default.email %></a></p>
         <% else %>
-        <%= "The first default contact appears in full here" %>
+        <%= "Set any of the contacts below as default" %>
         <% end %>
           <h5 class="heading">All contacts <small><%= link_to "Add Contact", new_company_contact_path(:company_id => @company.id),:class => "pull-right" %> </small></h5>
-        <% @i=0 %>
+        <% # @i=0 %>
         <% @company.contacts.each do |contact| %>
-           <% if @default 
-                did = @default.id
-              else
-                did = -1 #Non-existent id
-              end
-            %>
-           <% unless (contact.id == did) || contact.deleted? %>
-             <%= link_to contact.name, show_modal_company_contact_path(:company_id => @company.id,:id => contact.id), {:remote => true, 'data-controls-modal' =>  "contact-modal",'data-toggle'=>'modal', 'data-target'=>'#contact-modal'} %>
+           <% unless contact.deleted? %>
+             <%= link_to contact.name, show_modal_company_contact_path(:company_id => @company.id,:id => contact.id), {:remote => true, 'data-controls-modal' =>  "contact-modal",'data-toggle'=>'modal', 'data-target'=>'#contact-modal'} %><br/>
            <% end %>
         <% end %>
       <% else %>

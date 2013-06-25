@@ -1,7 +1,7 @@
 class Company < ActiveRecord::Base
   attr_accessible :address, :location, :name, :phone, :url, 
                   :poc_name,:manager_name,:team_tokens, :description, :status,
-                  :status_text
+                  :status_text, :default_contact
   
   attr_reader :team_tokens
 
@@ -19,6 +19,10 @@ class Company < ActiveRecord::Base
   def poc_name
     pointofcontact.try(:name)
   end
+
+  belongs_to :default_contact,
+  :class_name => 'Contact',
+  :foreign_key => 'default_contact_id'
 
   def poc_name=(name)
     self.pointofcontact = User.find_by_name(name) if name.present?
@@ -90,7 +94,7 @@ class Company < ActiveRecord::Base
     self.active=true
   end
 
-  validates :name, presence: true , length: {minimum:2,maximum:100}
+  validates :name, presence: true ,uniqueness: true, length: {minimum:2,maximum:100}
   validates :address, presence: true , length: {minimum:2,maximum:100}
   validates :location, presence: true , length: {minimum:2,maximum:100}
   VALID_PHONE_REGEX = /\A\+?[0-9\-\s\(\)]*\z/
