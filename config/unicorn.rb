@@ -1,8 +1,8 @@
-root = "/home/guru/apps/trackr"
-working_directory "#{root}/"
+root = "/home/guru/apps/trackr/current"
+working_directory root
 pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"
 stdout_path "#{root}/log/unicorn.log"
 listen "/tmp/unicorn.trackr.sock"
-worker_processes 2
+worker_processes 10
 timeout 30
