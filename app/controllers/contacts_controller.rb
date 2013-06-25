@@ -143,6 +143,11 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1.json
   def destroy
     @contact = Contact.find(params[:id])
+    @company = @contact.company
+    if @company.default_contact_id == @contact.id
+      @company.default_contact_id = nil
+      @company.save
+    end
     @contact.destroy
 
     respond_to do |format|

@@ -1,18 +1,26 @@
 <div class="logentry">
   <strong> 		  
-        <%= if log.user_id && User.find(log.user_id)   
-  		       User.find(log.user_id).name  
-  		     else
-  		       "SPO"
-  		     end
-                                     %>
+        <%= if log.user_id 
+              begin   
+  		          User.find(log.user_id).name  
+  		        rescue 
+  		          "Previous SPO Person"
+  		        end
+            else
+              "SPO"
+            end
+        %>
   </strong>                                   
   		     and
   <strong>
-  		 <%= if log.contact_id && Contact.find(log.contact_id)
-  		 		Contact.find(log.contact_id).name
-  		 	 else
-  		 	   "Company"
+  		 <%= if log.contact_id
+             begin
+  		 		     Contact.find(log.contact_id).name
+  		 	     rescue
+               "Deleted Contact"
+             end
+           else
+            "Company"
   		 	 end                          %>	
   </strong>				 
               
