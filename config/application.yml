@@ -19,7 +19,7 @@ defaults: &defaults
     testset: 80
     testdone: 90
     rejected: 100
-    novacany: 110
+    novacancy: 110
     contactlater: 120
     blacklisted: 200
 development:
