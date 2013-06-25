@@ -59,11 +59,11 @@
       </div>
     </div>
     <% if @company.id %>
-    <div class="control-group">
-    <%= f.label :default_contact_id ,class: "control-label"%>
-    <div class="controls">
-      <%= select("log", :default_contact_id, @contacts.collect {|c| [ c.name, c.id ] }, {:include_blank => 'None'}) %>
-    </div>
+      <div class="control-group">
+      <%= f.label :default_contact_id ,class: "control-label"%>
+      <div class="controls">
+        <%= select("company", :default_contact_id, @contacts.collect {|c| [ c.name, c.id ] }, {:include_blank => 'None'}) %>
+      </div>
     <% end %>
   </div>
     <hr/>
