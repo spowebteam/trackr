@@ -8,6 +8,8 @@ gem 'bootstrap-will_paginate','0.0.6'
 gem 'settingslogic'
 gem 'nifty-generators'
 gem 'rails3-jquery-autocomplete' 
+gem 'capistrano'
+gem 'unicorn'
 
 group :production do
   gem 'pg'
