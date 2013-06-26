@@ -63,10 +63,10 @@ class CompaniesController < ApplicationController
     if current_user.superadmin?
       @companies=@source
     elsif current_user.admin?
-      @companies=@source.where(:active => true)
+      @companies=@source.select{|c| c.active?}
     else
       @companies=[]
-      @allcompanies=@source.where(:active => true)
+      @allcompanies=@source.select{|c| c.active?}
       @allcompanies.each do |company|
         if ((company.teams & current_user.teams).any?) || (company.poc_id == current_user.id)
             @companies << company
