@@ -1,5 +1,5 @@
 require "bundler/capistrano"
-load "config/recipes/assets"
+load "config/recipes/sake.rb"
 
 server "172.31.1.202", :web, :app, :db, primary: true
 
