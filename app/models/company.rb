@@ -99,6 +99,6 @@ class Company < ActiveRecord::Base
   validates :location,length: {minimum:0,maximum:100}
   VALID_PHONE_REGEX = /\A\+?[0-9\-\s\(\)\/{ext:}]*\z/
   validates :phone, format: {with: VALID_PHONE_REGEX, message: "Phone can be Numerals, (, ), / (For multiple numbers), Space , - , ext: (For extension). + symbol allowed at beggining"}
-  VALID_URL_REGEX = /\A[a-z\d\-.\/:]+\.[a-z]+\z/i
+  VALID_URL_REGEX = /\A[[a-z\d\-.\/:]+\.[a-z]+]?\z/i
   validates :url, format: {with: VALID_URL_REGEX}
 end
