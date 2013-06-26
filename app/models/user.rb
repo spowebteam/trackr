@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   :foreign_key => 'manager_id'
   
   has_many :logs
-  validates :name, presence: true , length: {minimum:2,maximum:100}
+  validates :name, presence: true , uniqueness: true,length: {minimum:2,maximum:100}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },uniqueness: true;
   VALID_PHONE_REGEX = /\A\+?[0-9\-\s\(\)]*\z/

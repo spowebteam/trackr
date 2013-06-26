@@ -95,10 +95,10 @@ class Company < ActiveRecord::Base
   end
 
   validates :name, presence: true ,uniqueness: true, length: {minimum:2,maximum:100}
-  validates :address, presence: true , length: {minimum:2,maximum:100}
-  validates :location, presence: true , length: {minimum:2,maximum:100}
-  VALID_PHONE_REGEX = /\A\+?[0-9\-\s\(\)]*\z/
-  validates :phone, format: {with: VALID_PHONE_REGEX},presence: true 
-  VALID_URL_REGEX = /[a-z\d\-.]+\.[a-z]+\z/i
-  validates :url, presence: true , format: {with: VALID_URL_REGEX}
+  validates :address, length: {minimum:0,maximum:1024}
+  validates :location,length: {minimum:0,maximum:100}
+  VALID_PHONE_REGEX = /\A\+?[0-9\-\s\(\)\/{ext:}]*\z/
+  validates :phone, format: {with: VALID_PHONE_REGEX, message: "Phone can be Numerals, (, ), / (For multiple numbers), Space , - , ext: (For extension). + symbol allowed at beggining"}
+  VALID_URL_REGEX = /\A[a-z\d\-.\/:]+\.[a-z]+\z/i
+  validates :url, format: {with: VALID_URL_REGEX}
 end

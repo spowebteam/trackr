@@ -5,7 +5,7 @@ class Team < ActiveRecord::Base
   attr_reader :user_tokens
   attr_reader :company_tokens
   
-  validates :name, presence: true , length: {minimum:2,maximum:100}
+  validates :name, presence: true ,uniqueness: true, length: {minimum:2,maximum:100}
   validates :description, length: {maximum:500}
 
   def set_single

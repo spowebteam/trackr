@@ -4,7 +4,7 @@ class Contact < ActiveRecord::Base
   has_many :logs
 
   validates :name, presence: true , length: {minimum:2,maximum:100}
-  # validates :address, length: {minimum:2,maximum:100}
+  validates :address, length: {minimum:0,maximum:1000}
   VALID_PHONE_REGEX = /\A[[\+?[0-9\-\s\(\)\/\,]*]\,]*\z/
   validates :mobile, format: {with: VALID_PHONE_REGEX}
   validates :landline, format: {with:VALID_PHONE_REGEX}
