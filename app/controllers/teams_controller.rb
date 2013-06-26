@@ -6,6 +6,13 @@ class TeamsController < ApplicationController
     @team=Team.new   
   end
 
+  def activity
+    @team=Team.find(params[:id])
+    @team.active=params[:active] if params[:active]
+    @team.save
+    redirect_to @team
+  end
+
   def create
     @user = current_user
     @team = Team.new (params[:team])

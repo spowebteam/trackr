@@ -1,6 +1,8 @@
 <% provide(:title,@team.name) %>
 
 <h1><%=@team.name %>  </h1>
+<hr />
+<%= render 'teams/editbutton' , object: @team %>
 <p><%= @team.description %> </p>
 <strong>Members</strong>
 <div>
