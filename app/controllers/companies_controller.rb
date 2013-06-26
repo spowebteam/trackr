@@ -55,8 +55,8 @@ class CompaniesController < ApplicationController
       @user.contacted_companies.each do |company|
         @company_ids << company.id
       end
-      @company_ids.uniq!
-      @source = Company.all(:include => [:default_contact,:logs,:teams,:pointofcontact]).find(@company_ids)
+      #@company_ids.uniq!
+      @source = Company.find_all_by_id(@company_ids,:include => [:default_contact,:logs,:teams,:pointofcontact])
     else
       @source=Company.all(:include => [:default_contact,:logs,:teams,:pointofcontact])
     end
