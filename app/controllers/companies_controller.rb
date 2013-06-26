@@ -41,20 +41,25 @@ class CompaniesController < ApplicationController
   end
   def index
     @counterstart=1;
+    if params[:team_id]
+      @source=Team.find(params[:team_id]).companies
+    else
+      @source=Company
+    end
     if current_user.superadmin?
-      @companies=Company.all(:include => [:default_contact,:logs,:teams,:pointofcontact])
+      @companies=@source.all(:include => [:default_contact,:logs,:teams,:pointofcontact])
     elsif current_user.admin?
-      @companies=Company.where(:active => true).all(:include => [:default_contact,:logs,:teams,:pointofcontact])
+      @companies=@source.where(:active => true).all(:include => [:default_contact,:logs,:teams,:pointofcontact])
     else
       @companies=[]
-      @allcompanies=Company.where(:active => true).all(:include => [:default_contact,:logs,:teams,:pointofcontact])
+      @allcompanies=@source.where(:active => true).all(:include => [:default_contact,:logs,:teams,:pointofcontact])
       @allcompanies.each do |company|
         if ((company.teams & current_user.teams).any?) || (company.poc_id == current_user.id)
             @companies << company
         end
       end
     end
-    
+
   end
   def update
     @company=Company.find(params[:id])

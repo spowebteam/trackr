@@ -20,6 +20,7 @@ Trackr::Application.routes.draw do
   resources :teams do
     get :autocomplete_user_name, :on => :collection
     put :activity, :on => :member
+    resources :companies, :on=> :member, only: [:index]
   end
 
   resources :contacts do
