@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+load "config/recipes/assets"
 
 server "172.31.1.202", :web, :app, :db, primary: true
 
