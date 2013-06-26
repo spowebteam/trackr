@@ -70,6 +70,16 @@ class CompaniesController < ApplicationController
   def updatestatus
     @company=Company.find(params[:id])
     can_view_else_redirect (@company)
+    @log = @company.logs.build(params[:log])
+    @prev_status=@company.status_text
+    @company.status=params[:status]
+    @log.content = "Status changed from #{@prev_status} to #{@company.status_text}"
+    @log.user_id=current_user.id
+    begin
+      @log.save
+    rescue Exception => e
+
+    end
     @company.status=params[:status]
     @company.save
     redirect_to @company
