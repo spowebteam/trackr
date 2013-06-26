@@ -43,9 +43,11 @@ module SessionsHelper
 
   def can_view_else_redirect (company)
     if (company.teams & current_user.teams).empty?
-      unless current_user.admin?
-        flash[:error]="Access Denied"
-        redirect_to goback 
+      unless company.poc_id == current_user.id
+        unless current_user.admin?
+          flash[:error]="Access Denied"
+          redirect_to goback 
+        end
       end
     end
   end

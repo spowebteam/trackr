@@ -1,8 +1,8 @@
 class CompaniesController < ApplicationController
-	before_filter :signed_in_user, only: [:index,:show,:edit,:update,:destroy]
+	before_filter :signed_in_user
 
     #before_filter :correct_user, only: []
-  before_filter :admin_user, only: [:destroy,:new,:create]
+  before_filter :admin_user, only: [:destroy]
   
   autocomplete :user, :name, :full => true 
   def new
@@ -48,7 +48,11 @@ class CompaniesController < ApplicationController
       @companies=[]
       @allcompanies=Company.where(:active => true).all(:include => :teams)
       @allcompanies.each do |company|
-        @companies << company unless (company.teams & current_user.teams).empty?
+        unless (company.teams & current_user.teams).empty?
+          unless company.poc_id != current_user.id
+            @companies << company
+          end
+        end
       end
     end
     

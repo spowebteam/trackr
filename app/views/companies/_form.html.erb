@@ -50,7 +50,8 @@
       <%= f.label :point_of_contact , class: "control-label" %>
       <div class="controls">
         <%= f.autocomplete_field :poc_name, autocomplete_user_name_companies_path %>
-      </div> 
+      </div>
+      Please add yourselves as Point of Contact or else you would NOT be able to access the company once you create it. 
     </div> 
 
     <div class="control-group">
@@ -58,6 +59,7 @@
       <div class="controls">
         <%= f.autocomplete_field :manager_name, autocomplete_user_name_companies_path %>
       </div>
+
     </div>
     <% if @company.id %>
       <div class="control-group">
