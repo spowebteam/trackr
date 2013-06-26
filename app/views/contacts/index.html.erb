@@ -6,53 +6,35 @@
 <%= link_to "Add Contact to #{@company.name} ", new_company_contact_path(:company_id => @company.id),:class => "pull-right btn btn-primary" %>
 <% end %>
 </h1> 
-<div class="pagination-centered">
-<%= will_paginate unless @company%>
-</div>
-<span class="visible-desktop hidden-tablet hidden-phone">
-<table class="table table-striped table-hover table-bordered">
-  <tr>
-    <th>Name (Designation)</th>
-    <th>Phone </th>
-    <th>Email</th>
-    <th>Company</th>
-    <th></th>
- </tr>
 
-<% @contacts.each do |contact| %>
-  <tr>
-    <td><%= contact.name %> ( <%= contact.designation %> )</td>
-    <td>(O)<%= contact.landline %>, (M) <%= contact.mobile %></td>
-    <td><%= contact.email %></td>
-    <td><% if contact.company %><%= contact.company.name %><% end %></td>
-    <td><%= render 'contacts/contact_button', contact: contact %></td>
-  </tr>
+<table class="table table-striped table-hover table-bordered" id="contact-table">
+  <thead>
+    <tr>
+      <th class="hidden-desktop hidden-tablet">Details</th>
+      <th class="hidden-phone">Name (Designation)</th>
+      <th class="hidden-phone">Phone </th>
+      <th class="hidden-phone">Email</th>
+      <th class="hidden-phone">Company</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contacts.each do |contact| %>
+    <tr>
+      <td class="hidden-desktop hidden-tablet">
+          <%= contact.name %> ( <%= contact.designation %> )
+          <% if contact.company %><%= " @ #{contact.company.name}" %><% end %> <br/>
+          (O)<%= contact.landline %> (M) <%= contact.mobile %><br />
+          <%= contact.email %></td>
+      <td class="hidden-phone" ><%= contact.name %> ( <%= contact.designation %> )</td>
+      <td class="hidden-phone" >(O)<%= contact.landline %>, (M) <%= contact.mobile %></td>
+      <td class="hidden-phone" ><%= contact.email %></td>
+      <td class="hidden-phone" ><% if contact.company %><%= contact.company.name %><% end %></td>
+      <td><%= render 'contacts/contact_button', contact: contact %></td>
+    </tr>
+  
 <% end %>
+</tbody>
 </table>
-</span>
-<span class="visible-phone visible-tablet hidden-desktop">
-<table class="table table-striped table-hover table-bordered">
-  <tr>
-    <th>Details</th>
-    <th></th>
-  </tr>
-
-<% @contacts.each do |contact| %>
-  <tr>
-    <td><%= contact.name %> ( <%= contact.designation %> ) @ 
-        <% if contact.company %><%= contact.company.name %><% end %> <br/>
-        (O)<%= contact.landline %> (M) <%= contact.mobile %><br />
-        <%= contact.email %>
-    <td><%= render 'contacts/contact_button', contact: contact %></td>
-  </tr>
-<% end %>
-</table>
-<div class="pagination-centered">
-<%= will_paginate unless @company %>
-</div>
-<br />
-</span>
-</div>
-
-
 

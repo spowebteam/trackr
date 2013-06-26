@@ -19,9 +19,9 @@ class ContactsController < ApplicationController
   def index
     if params[:company_id].nil?
       if current_user.superadmin?
-        @contacts = Contact.paginate(page: params[:page]).includes(:company)
+        @contacts = Contact.includes(:company).all
       elsif current_user.admin?
-        @contacts = Contact.paginate(page: params[:page]).includes(:company).where(:active => true)
+        @contacts = Contact.includes(:company).where(:active => true)
       else
         flash[:error]="Access Denied"
         redirect_to goback
