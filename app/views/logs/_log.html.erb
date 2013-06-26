@@ -25,7 +25,7 @@
   </strong>				 
               
   <div class="timestamp pull-right"> 
-         <%=" #{log.created_at} ( #{time_ago_in_words(log.created_at)})" %>
+         <%=" #{log.created_at.strftime('%d %b %y')} ( #{time_ago_in_words(log.created_at)} ago)" %>
   </div> 
   <div class="content"><%= log.content %></div>
   <%= link_to "Edit" , edit_log_path(log) %>
