@@ -10,9 +10,10 @@ class CompaniesController < ApplicationController
   end
   def create
   	@company = Company.new (params[:company])
+    @company.teams << current_user.teams.first
   	if @company.save
       #sign_in @user
-  		flash[:success] = "Welcome to the Student Placement Office, IIT Kanpur!"
+  		flash[:success] = "Company created"
       
   		  redirect_to @company
       
@@ -48,10 +49,8 @@ class CompaniesController < ApplicationController
       @companies=[]
       @allcompanies=Company.where(:active => true).all(:include => :teams)
       @allcompanies.each do |company|
-        unless (company.teams & current_user.teams).empty?
-          unless company.poc_id != current_user.id
+        if ((company.teams & current_user.teams).any?) || (company.poc_id == current_user.id)
             @companies << company
-          end
         end
       end
     end
