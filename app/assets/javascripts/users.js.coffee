@@ -5,3 +5,12 @@ jQuery ->
   $('#user-table').dataTable
     sPaginationType: "full_numbers"
     bJQueryUI: true
+    aoColumns: [
+    	null,
+    	null,
+    	null,
+    	null,
+    	null,
+    	null,
+    	null,
+        bSearchable: false ]
