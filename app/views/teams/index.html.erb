@@ -1,14 +1,14 @@
 <% provide(:title,"Teams") %>
 <h1>Teams list<% if current_user.admin?%><%=link_to "Add a new Team",new_team_path, class: "btn btn-inverse pull-right"%><%end%></h1>
-<table class="table table-striped table-hover table-bordered">
+<table class="table table-striped table-hover table-bordered" id="team-table">
   <thead>
     <tr>
-      <td>Sl No.</td>
-      <td>Team</td>
-      <td class="hidden-phone hidden-mobile">Description</td>
-      <td>Members</td>
-    <tr>
-  <thead>
+      <th>Sl No.</th>
+      <th>Team</th>
+      <th class="hidden-phone">Description</th>
+      <th>Members</th>
+    </tr>
+  </thead>
   <tbody>
   	<% counter=1 %>
     <% @teams.each do |team| %>
@@ -16,7 +16,7 @@
     <tr>
       <td><%= counter %></td>
       <td><%= link_to team.name, team_path(team)  %></td>
-      <td class="hidden-phone hidden-mobile"><%= team.description %></td>
+      <td class="hidden-phone"><%= team.description %></td>
       <td>
       	<% userlist=[]  
       	   team.users.each do |user|
