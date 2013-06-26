@@ -42,17 +42,31 @@ class CompaniesController < ApplicationController
   def index
     @counterstart=1;
     if params[:team_id]
-      @source=Team.find(params[:team_id]).companies
+      @source=Team.find(params[:team_id]).companies.all(:include => [:default_contact,:logs,:teams,:pointofcontact])
+    elsif params[:user_id]
+      @company_ids=[]
+      @source=[]
+      @user=User.find(params[:user_id])
+      @user.teams.each do |team|
+        team.companies.each do |company|
+          @company_ids << company.id
+        end
+      end
+      @user.contacted_companies.each do |company|
+        @company_ids << company.id
+      end
+      @company_ids.uniq!
+      @source = Company.all(:include => [:default_contact,:logs,:teams,:pointofcontact]).find(@company_ids)
     else
-      @source=Company
+      @source=Company.all(:include => [:default_contact,:logs,:teams,:pointofcontact])
     end
     if current_user.superadmin?
-      @companies=@source.all(:include => [:default_contact,:logs,:teams,:pointofcontact])
+      @companies=@source
     elsif current_user.admin?
-      @companies=@source.where(:active => true).all(:include => [:default_contact,:logs,:teams,:pointofcontact])
+      @companies=@source.where(:active => true)
     else
       @companies=[]
-      @allcompanies=@source.where(:active => true).all(:include => [:default_contact,:logs,:teams,:pointofcontact])
+      @allcompanies=@source.where(:active => true)
       @allcompanies.each do |company|
         if ((company.teams & current_user.teams).any?) || (company.poc_id == current_user.id)
             @companies << company

@@ -15,6 +15,7 @@ Trackr::Application.routes.draw do
   end
   resources :users do
     put :editlevel, :on => :member
+    resources :companies, :on=> :member, only: [:index]
   end
   
   resources :teams do
