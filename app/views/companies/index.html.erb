@@ -2,21 +2,68 @@
 
 <% provide(:title,"Companies") %>
 <h1>Companies list<br/><small><% if current_user.poweruser?%><%=link_to "Add a new Company",new_company_path, class: "btn btn-inverse pull-right"%><%end%></small></h1>
+<hr />
 
-
-
-<% @companies.each do |company| %>
-<%= link_to(company) do %>
-<div class="span4 rounded">
-	<h4><%= company.name %></h4>
-	<p><%= company.location %> </p>
-	
-	<div>
-		<ul>
-		</ul>
-	</div>
-</div>
-<% end %>
-<% end %>
+<table class="table table-striped table-hover table-bordered" id="company-table">
+  <thead>
+    <tr>
+      <th class="hidden-desktop hidden-tablet visible-phone">Details</th>
+      <th class="hidden-phone">Name</th>
+      <th class="hidden-phone hidden-tablet hidden-desktop">Location</th>
+      <th class="hidden-phone">Status</th>
+      <th class="hidden-phone">SPO Contact</th>
+      <th class="hidden-phone">Last Contact</th>
+      <th class="hidden-phone">HR Name</th>
+      <th class="hidden-phone">HR Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @companies.each do |company| %>
+    <tr>
+      <td class="hidden-desktop hidden-tablet visible-phone"><%=link_to company.name, company%> 
+        <%= company.status_text %> 
+      </td>
+      <td class="hidden-phone"><%= link_to company.name, company%></td>
+      <td class="hidden-phone hidden-tablet hidden-desktop"><%= company.location %></td>
+      <td class="hidden-phone"><%= company.status_text  %></td>
+      <td class="hidden-phone">
+        <% begin %>
+          <%= company.poc_name%>
+        <% rescue %>
+          <%= "No SPO Contact" %>
+        <% end %>
+      </td>
+      <td class="hidden-phone">
+        <% begin %>
+          <% time=company.logs.order('created_at DESC').first.created_at %>
+          <%= "#{time.strftime('%d %b %y')}
+               <br/>#{time_ago_in_words(time)}".html_safe %>
+        <% rescue %>
+          <%= "Not contacted" %>
+        <% end %>
+      </td>
+      <td class="hidden-phone">
+        <% begin %>
+          <%= company.default_contact.name %>
+        <% rescue %>
+          <%= "No default HR" %>
+        <% end %>
+      </td>
+      <td class="hidden-phone">
+        <% begin %>
+          <% contact=company.default_contact %>
+          <%= "<a href='tel: #{contact.mobile}'>#{contact.mobile}</a> (M)
+          <br />
+          <a href='tel:#{contact.landline}'>#{contact.landline}</a> (O)
+          <br/>
+          <a href='mailto:#{contact.email}'>#{contact.email}</a>".html_safe %>
+        <% rescue %>
+          <%= "No HR Contact" %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 

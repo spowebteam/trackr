@@ -18,3 +18,17 @@ $ ->
   $('#log-entry-cancel').click ->
   	$('#log-entry-button').show()
   	$('#log-entry-form').hide()
+
+jQuery ->
+  $('#company-table').dataTable
+    sPaginationType: "full_numbers"
+    bJQueryUI: true
+    aoColumns: [
+      null,
+      null,
+      null,
+      null,
+      null,
+      bSearchable: false,
+      null,
+        bSearchable: false ]

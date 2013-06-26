@@ -42,12 +42,12 @@ class CompaniesController < ApplicationController
   def index
     @counterstart=1;
     if current_user.superadmin?
-      @companies=Company.all
+      @companies=Company.all(:include => [:default_contact,:logs,:teams,:pointofcontact])
     elsif current_user.admin?
-      @companies=Company.where(:active => true)
+      @companies=Company.where(:active => true).all(:include => [:default_contact,:logs,:teams,:pointofcontact])
     else
       @companies=[]
-      @allcompanies=Company.where(:active => true).all(:include => :teams)
+      @allcompanies=Company.where(:active => true).all(:include => [:default_contact,:logs,:teams,:pointofcontact])
       @allcompanies.each do |company|
         if ((company.teams & current_user.teams).any?) || (company.poc_id == current_user.id)
             @companies << company
