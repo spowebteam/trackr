@@ -27,8 +27,12 @@ class TeamsController < ApplicationController
 
   def index
     @user = current_user
-    @teams=Team.where(:single => nil).all(:include => :users)
-    @allteams=Team.where("name like ?", "%#{params[:q]}%")
+    if current_user.superadmin?
+      @teams=Team.where(:single => nil).all(:include => :users)
+    else
+      @teams=Team.where(:active => true).where(:single => nil).all(:include => :users)
+    end
+    @allteams=Team.where(:active => true).where("name like ?", "%#{params[:q]}%")
     respond_to do |format|
       format.html
       format.json {render json: @allteams}
