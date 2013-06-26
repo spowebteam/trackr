@@ -1,5 +1,6 @@
 <%= form_for @company , html: {class: "form-horizontal span4"} do |f|  %>
   <fieldset>
+    <%=render 'shared/error_messages', object: f.object %>
     <legend>
     <%= 
       if @company.id 

@@ -1,23 +1,10 @@
-<% if @user && @user.errors.any? %>
-  <% entity=@user. %>
-<% elsif @company && @company.errors.any? %>
-  <% entity=@company %>
-<% elsif @contact && @contact.errors.any? %>
-  <% entity=@contact %>
-<% else %>
-  <% entity=nil %>
-<% end %>
-<% if entity %>
-  <% if entity.errors.any? %>
-      <div id="error-explanation">
-        <div class="alert alert-error">
-          This form contains <%= pluralize(entity.errors.count, "error") %>.
-          <ul>
-            <% entity.errors.full_messages.each do |msg| %>
-              <li > <%= msg %> </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-  <% end %>
+<% if object.errors.any? %>
+    <div class="alert alert-error">
+      The form contains <%= pluralize(object.errors.count, "error") %>.
+    <ul>
+    <% object.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
 <% end %>

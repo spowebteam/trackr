@@ -9,7 +9,7 @@
         end
       %>
     </legend>
-    <%=render 'shared/error_messages' %>
+    <%=render 'shared/error_messages', object: f.object %>
     <div class="control-group">
       <%=f.label :name , class: "control-label" %>
       <div class="controls">

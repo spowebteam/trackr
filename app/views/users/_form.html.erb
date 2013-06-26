@@ -1,7 +1,11 @@
 <%= form_for @user, :html => {:class => "form-horizontal span12"} do |f| %>
   <fieldset>
-  <%=render 'shared/error_messages' %>
-
+  <%=render 'shared/error_messages', object: f.object %>
+    <% if @user.id %>
+      <legend>Edit <%= @user.name %>  details</legend>
+    <% else %>
+      <legend>Add new user</legend>
+    <% end %>
     <div class="control-group">
       <%= f.label :name , :class =>"control-label"%>
       <div class="controls">
