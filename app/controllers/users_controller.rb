@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 
     @counterstart=1;
     if current_user.superadmin?
-      @users=User.paginate(page: params[:page])
+      @users=User.all
     else
-      @users=User.where(level: Global.level[:superadmin] .. Global.level[:disabled]).paginate(page: params[:page])
+      @users=User.where(level: Global.level[:superadmin] .. Global.level[:disabled])
     end
     @pagenum= params[:page]? params[:page].to_i : 1
     @counterstart=(User.per_page*(@pagenum-1))+1

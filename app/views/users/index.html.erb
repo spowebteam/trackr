@@ -1,33 +1,31 @@
 <% provide(:title,"Users") %>
 <h1>User List</h1>
-<div class="pagination-centered">
-<%= will_paginate %>
-</div>
-<table class="table table-striped table-hover table-bordered">
+<table class="table table-striped table-hover table-bordered" id="user-table">
   <thead>
     <tr>
-      <td>Sl No.</td>
-      <td>Name</td>
-      <td>Email</td>
-      <td>Phone</td>
-      <td>Identifier</td>
-      <td>Level</td>
+      <th>Sl No.</th>
+      <th class="hidden-desktop hidden-tablet visible-phone">Details</th>
+      <th class="hidden-phone">Name</th>
+      <th class="hidden-phone">Email</th>
+      <th class="hidden-phone">Phone</th>
+      <th class="hidden-phone">Identifier</th>
+      <th class="hidden-phone">Level</th>
       <% if current_user.admin? %>
-      <td>More</td>
+      <th>More</th>
       <% end %>  
-
-    <tr>
-  <thead>
+    </tr>
+  </thead>
   <tbody>
     <% counter = @counterstart %>
     <% @users.each do |user| %>
     <tr>
       <td><%= counter %></td>
-      <td><%= user.name %></td>
-      <td><%= user.email %></td>
-      <td><%= user.phone %></td>
-      <td><%= user.identifier %></td>
-      <td><%= user.role %></td>
+      <td class="hidden-desktop hidden-tablet visible-phone"><%=link_to user.name, user%> <%= user.email %> <%= user.phone %></td>
+      <td class="hidden-phone"><%=link_to user.name, user%></td>
+      <td class="hidden-phone"><%= user.email %></td>
+      <td class="hidden-phone"><%= user.phone %></td>
+      <td class="hidden-phone"><%= user.identifier %></td>
+      <td class="hidden-phone"><%= user.role %></td>
       <% if current_user.admin? %>
       <td><%= render 'users/user_edit_button', user: user %></td>
       <% end %>
@@ -36,6 +34,4 @@
     <% end %>
   </tbody>
 </table>
-<div class="pagination-centered">
-<%= will_paginate %>
-</div>
+
