@@ -31,6 +31,11 @@ class UsersController < ApplicationController
   def create
   	@user = User.new (params[:user])
   	if @user.save
+      @team=Team.new
+      @team.name=@user.name
+      @team.user_tokens="#{@user.id}"
+      @team.set_single
+      @team.save
       sign_in @user
   		flash[:success] = "Welcome to the Sample App!"
       

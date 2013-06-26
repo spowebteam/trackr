@@ -20,10 +20,11 @@ class TeamsController < ApplicationController
 
   def index
     @user = current_user
-    @teams=Team.all(:include => :users)
+    @teams=Team.where(:single => nil).all(:include => :users)
+    @allteams=Team.where("name like ?", "%#{params[:q]}%")
     respond_to do |format|
       format.html
-      format.json {render json: @teams}
+      format.json {render json: @allteams}
     end
   end
 
