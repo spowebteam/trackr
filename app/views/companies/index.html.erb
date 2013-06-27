@@ -1,7 +1,20 @@
 
 
 <% provide(:title,"Companies") %>
-<h1>Companies list<br/><small><% if current_user.poweruser?%><%=link_to "Add a new Company",new_company_path, class: "btn btn-inverse pull-right"%><%end%></small></h1>
+<h1>Companies 
+    <%= begin
+          if params[:team_id] 
+            "handled by #{Team.find(params[:team_id]).name}"
+          elsif params[:user_id]
+            "handled by #{User.find(params[:user_id]).name}"
+          else
+            ""
+          end
+        rescue
+          ""
+        end
+      %>
+  <small><% if current_user.poweruser?%><%=link_to "Add a new Company",new_company_path, class: "btn btn-inverse pull-right"%><%end%></small></h1>
 <hr />
 
 <table class="table table-striped table-hover table-bordered" id="company-table">
