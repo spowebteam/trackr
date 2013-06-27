@@ -2,7 +2,7 @@
 
 <h1><%=@user.name %>  <small><%= @user.identifier %></small>
 	<% if current_user.admin? %>
-	<%= render 'users/user_edit_button', user: @user %>
+	<%= render 'users/user_edit_button', { user: @user , right: false} %>
 	<% end %>
     </h1>
 <em>is <%=@user.role %></em>
