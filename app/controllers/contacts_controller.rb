@@ -2,6 +2,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   before_filter :admin_user, only: [:destroy]
+  before_filter :power_user
   
   def activity
     @contact=Contact.find(params[:id])

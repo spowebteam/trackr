@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
 	before_filter :signed_in_user
+  before_filter :power_user
 
     #before_filter :correct_user, only: []
   before_filter :admin_user, only: [:destroy]

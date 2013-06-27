@@ -41,6 +41,10 @@ module SessionsHelper
     end  
   end
 
+  def power_user
+    redirect_to(root_path) unless current_user.poweruser?
+  end
+  
   def can_view_else_redirect (company)
     if (company.teams & current_user.teams).empty?
       unless company.poc_id == current_user.id
