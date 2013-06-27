@@ -31,7 +31,7 @@
       <td class="hidden-phone" >(O)<%= contact.landline %>, (M) <%= contact.mobile %></td>
       <td class="hidden-phone" ><%= contact.email %></td>
       <td class="hidden-phone" ><% if contact.company %><%= contact.company.name %><% end %></td>
-      <td><%= render 'contacts/contact_button', contact: contact %></td>
+      <td><%= render 'contacts/contact_button', {contact: contact, right: true }%></td>
     </tr>
   
 <% end %>

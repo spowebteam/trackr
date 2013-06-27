@@ -3,7 +3,7 @@
 <span class="span12">
 <h1><%=@contact.name %>  <small><%= @contact.designation %></small></h1>
 <hr />
-<%= render 'contacts/contact_button', contact: @contact %>
+<%= render 'contacts/contact_button',{ contact: @contact , right: false } %>
 <hr/>
 <p>
 	Contact of <%= link_to @contact.company.name , @contact.company %>

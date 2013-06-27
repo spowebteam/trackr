@@ -18,3 +18,12 @@
 .hidden-element {
 	visibility: hidden;
 }
+
+.pull-right .dropdown-menu:after {
+    left: auto;
+    right: 13px;
+}
+.pull-right .dropdown-menu {
+    left: auto;
+    right: 0;
+}

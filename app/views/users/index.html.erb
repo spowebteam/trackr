@@ -26,7 +26,8 @@
       <td class="hidden-phone"><%= user.identifier %></td>
       <td class="hidden-phone"><%= user.role %></td>
       <% if current_user.admin? %>
-      <td><%= render 'users/user_edit_button', user: user %></td>
+      <% right = true %>
+      <td><%= render 'users/user_edit_button',{ user: user , right: right}%></td>
       <% else %>
       <td><%= link_to "User", user, class:"btn btn-primary" %></td>
       <% end %>

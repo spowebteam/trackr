@@ -2,7 +2,7 @@
 
 <h1><%=@team.name %>  </h1>
 <hr />
-<%= render 'teams/editbutton' , object: @team %>
+<%= render 'teams/editbutton' , {object: @team , right: false }%>
 <p><%= @team.description %> </p>
 <strong>Members</strong>
 <div>
