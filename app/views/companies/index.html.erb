@@ -2,7 +2,11 @@
 
 <% provide(:title,"Companies") %>
 <h1>Companies list<br/><small><% if current_user.admin?%><%=link_to "Add a new Company",new_company_path, class: "btn btn-inverse pull-right"%><%end%></small></h1>
-
+<p>
+  Download:
+  <%= link_to "CSV", companies_path(format: "csv") %> |
+  <%= link_to "Excel", companies_path(format: "xlsx") %>
+</p>
 
 
 <% @companies.each do |company| %>

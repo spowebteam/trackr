@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Address</Data></Cell>
+        <Cell><Data ss:Type="String">Location</Data></Cell>
+        <Cell><Data ss:Type="String">Phone</Data></Cell>
+        <Cell><Data ss:Type="String">URL</Data></Cell>
+        <Cell><Data ss:Type="String">Point of Contact</Data></Cell>
+        <Cell><Data ss:Type="String">Manager</Data></Cell>
+        <Cell><Data ss:Type="String">Team Tokens</Data></Cell>
+        <Cell><Data ss:Type="String">Description</Data></Cell>
+        <Cell><Data ss:Type="String">Status</Data></Cell>
+        <Cell><Data ss:Type="String">Status Text</Data></Cell>
+
+      </Row>
+    <% @companies.each do |company| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= company.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= company.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= company.address %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= company.location %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= company.phone %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= company.url %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= company.poc_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= company.manager_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= company.team_tokens %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= company.description %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= company.status %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= company.status_text %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

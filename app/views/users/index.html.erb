@@ -3,6 +3,11 @@
 <div class="pagination-centered">
 <%= will_paginate %>
 </div>
+<p>
+  Download:
+  <%= link_to "CSV", users_path(format: "csv") %> |
+  <%= link_to "Excel", users_path(format: "xlsx") %>
+</p>
 <table class="table table-striped table-hover table-bordered">
   <thead>
     <tr>
