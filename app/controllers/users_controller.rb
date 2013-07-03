@@ -17,8 +17,14 @@ class UsersController < ApplicationController
       format.json do 
         @allusers = User.where(level: Global.level[:superadmin] .. Global.level[:disabled]).where("name like ?", "%#{params[:q]}%") 
         render :json => @allusers 
+        
       end
+      @usr=User.all
+      format.csv { render text: User.to_csv() }
+      #format.xlsx { send_data @usr.to_csv(col_sep: "\t") }
+      format.xlsx
     end
+    
   end
   def show
   	@user=User.find(params[:id])
@@ -57,7 +63,14 @@ class UsersController < ApplicationController
     @user.save
     redirect_to users_path
   end
-
+  def User.to_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |user|
+        csv << user.attributes.values_at(*column_names)
+      end
+    end
+  end
   def edit
     @user=User.find(params[:id])
   end

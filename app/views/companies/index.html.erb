@@ -15,8 +15,13 @@
         end
       %>
   <small><% if current_user.poweruser?%><%=link_to "Add a new Company",new_company_path, class: "btn btn-inverse pull-right"%><%end%></small></h1>
-<hr />
 
+<p>
+  Download:
+  <%= link_to "CSV", companies_path(format: "csv") %> |
+  <%= link_to "Excel", companies_path(format: "xlsx") %>
+</p>
+<hr />
 <table class="table table-striped table-hover table-bordered" id="company-table">
   <thead>
     <tr>
@@ -78,5 +83,6 @@
     <% end %>
   </tbody>
 </table>
+
 
 

@@ -73,8 +73,15 @@ class CompaniesController < ApplicationController
             @companies << company
         end
       end
+      
     end
-
+    @companies=Company.all
+    respond_to do |format|
+        format.html # /
+        format.json { render json: @companies}
+        format.csv { render text: Company.to_csv() }
+        format.xlsx
+    end
   end
   def update
     @company=Company.find(params[:id])
@@ -110,6 +117,14 @@ class CompaniesController < ApplicationController
     @company.active=params[:active] if params[:active]
     @company.save
     redirect_to @company
+  end
+  def Company.to_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |company|
+        csv << company.attributes.values_at(*column_names)
+      end
+    end
   end
   private
     def signed_in_user

@@ -1,6 +1,11 @@
 <% provide(:title,"Users") %>
 
 <h1>User List</h1>
+<p class="pull-right">
+  Download:
+  <%= link_to "CSV", users_path(format: "csv") %> |
+  <%= link_to "Excel", users_path(format: "xlsx") %>
+</p>
 <table class="table table-striped table-hover table-bordered" id="user-table">
   <thead>
     <tr>
