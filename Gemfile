@@ -12,7 +12,7 @@ gem 'capistrano'
 gem 'unicorn'
 
 group :production do
-  gem 'pq'
+  gem 'pg'
 end
 
 

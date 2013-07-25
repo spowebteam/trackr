@@ -97,8 +97,6 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     multi_json (1.7.5)
-    mysql2 (0.3.11)
-    mysql2 (0.3.11-x86-mingw32)
     net-scp (1.1.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -109,6 +107,8 @@ GEM
     nifty-generators (0.4.6)
     nokogiri (1.5.9)
     nokogiri (1.5.9-x86-mingw32)
+    pg (0.16.0)
+    pg (0.16.0-x86-mingw32)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -205,8 +205,8 @@ DEPENDENCIES
   jquery-datatables-rails!
   jquery-rails (= 2.0.2)
   jquery-ui-rails
-  mysql2
   nifty-generators
+  pg
   rails (= 3.2.12)
   rails3-jquery-autocomplete
   rspec-rails (= 2.11.0)
