@@ -78,7 +78,7 @@ class CompaniesController < ApplicationController
     respond_to do |format|
         format.html # /
         format.json { render json: @companies}
-        format.csv { render text: Company.to_csv() }
+        format.csv { render text: @companies.to_csv() }
         format.xlsx
     end
   end
