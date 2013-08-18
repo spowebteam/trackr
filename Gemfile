@@ -12,7 +12,7 @@ gem 'capistrano'
 gem 'unicorn'
 
 group :production do
-  gem 'mysql2'
+  gem 'pg'
 end
 
 

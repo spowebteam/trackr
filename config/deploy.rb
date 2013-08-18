@@ -1,10 +1,10 @@
 require "bundler/capistrano"
 load "config/recipes/sake.rb"
 
-server "172.31.1.202", :web, :app, :db, primary: true
+server "ec2-54-229-64-201.eu-west-1.compute.amazonaws.com", :web, :app, :db, primary: true
 
 set :application, "trackr"
-set :user, "guru"
+set :user, "deploy"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false

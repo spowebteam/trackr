@@ -19,6 +19,9 @@
         <Cell><Data ss:Type="String">Description</Data></Cell>
         <Cell><Data ss:Type="String">Status</Data></Cell>
         <Cell><Data ss:Type="String">Status Text</Data></Cell>
+        <Cell><Data ss:Type="String">Last Contacted</Data></Cell>
+        <Cell><Data ss:Type="String">HR Name</Data></Cell>
+        <Cell><Data ss:Type="String">HR Contact</Data></Cell>
 
       </Row>
     <% @companies.each do |company| %>
@@ -34,7 +37,32 @@
         <Cell><Data ss:Type="String"><%= company.team_tokens %></Data></Cell>
         <Cell><Data ss:Type="String"><%= company.description %></Data></Cell>
         <Cell><Data ss:Type="String"><%= company.status %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= company.status_text %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= company.status_text %></Data></Cell>
+        <Cell><Data ss:Type="String"><% begin %>
+          <% time=company.logs.order('created_at DESC').first.created_at %>
+          <%= "#{time.strftime('%d %b %y')}
+               <br/>#{time_ago_in_words(time)}"%>
+        <% rescue %>
+          <%= "Not contacted" %>
+        <% end %></Data></Cell>
+        <Cell><Data ss:Type="Number"> <% begin %>
+          <%= company.default_contact.name %>
+        <% rescue %>
+          <%= "No default HR" %>
+        <% end %></Data></Cell>
+        <Cell><Data ss:Type="String"><% begin %>
+          <% contact=company.default_contact %>
+          <%= "tel: #{contact.mobile}#{contact.mobile} (M)
+          <br />
+          'tel:#{contact.landline}'#{contact.landline} (O)
+          <br/>
+          mail:#{contact.email}#{contact.email}" %>
+        <% rescue %>
+          <%= "No HR Contact" %>
+        <% end %></Data></Cell>
+
+
+
       </Row>
     <% end %>
     </Table>
