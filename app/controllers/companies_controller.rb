@@ -65,7 +65,7 @@ class CompaniesController < ApplicationController
       @companies=@source
     elsif current_user.admin?
       @companies=@source.select{|c| c.active?}
-    else
+    elsif current_user.poweruser?
       @companies=[]
       @allcompanies=@source.select{|c| c.active?}
       @allcompanies.each do |company|
@@ -75,7 +75,6 @@ class CompaniesController < ApplicationController
       end
       
     end
-    @companies=Company.all
     respond_to do |format|
         format.html # /
         format.json { render json: @companies}
