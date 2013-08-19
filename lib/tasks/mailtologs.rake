@@ -1,0 +1,48 @@
+require 'net/imap'
+
+namespace :logs do 
+  desc "Create Single User"
+  task frommail: :environment do
+    imap = Net::IMAP.new('newmailhost.cc.iitk.ac.in')
+    imap.authenticate('LOGIN', '########', '********')
+    imap.select('INBOX.Sent')
+    
+    # count = 0
+    months = %w(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
+    (4..30).each do |i|
+      start="1-#{months[i%12]}-#{2011+(i/12)}"
+      stop="1-#{months[(i+1)%12]}-#{2011+((i+1)/12)}"
+      puts "From : #{start}"
+      dir="/home/manyu/SPO/"
+      f = File.new("#{dir}#{start}-SENT.csv","w")
+      f.write "Name,Email,Company,Subject,Date\n"
+      imap.search(["BEFORE", stop, "SINCE", start]).each do |message_id|
+        envelope = imap.fetch(message_id, "ENVELOPE")[0].attr["ENVELOPE"]
+        subject = envelope.subject
+        date=envelope.date
+        subject.sub!(',',' ') if subject
+        if envelope.to
+          envelope.to.each do |to|
+            name = to.name
+            email_id = to.mailbox
+            domain = to.host
+            probable_company=domain.split('.')[0] if domain
+            name.sub!(',',' ') if name
+            f.write "#{name},#{email_id}@#{domain},#{probable_company},#{subject},#{date}\n".force_encoding('UTF-8')
+          end
+        end
+        if envelope.cc 
+          envelope.cc.each do |cc|
+            name = cc.name
+            email_id = cc.mailbox
+            domain = cc.host
+            probable_company=domain.split('.')[0] if domain
+            name.sub!(',',' ') if name
+            f.write "#{name},#{email_id}@#{domain},#{probable_company},#{subject},#{date}\n".force_encoding('UTF-8')
+          end
+        end
+      end
+      puts "Till : #{stop}"
+    end
+  end
+end
