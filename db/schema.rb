@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20130804192128) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
+    t.string   "identifier"
     t.string   "location"
     t.string   "phone"
     t.string   "url"

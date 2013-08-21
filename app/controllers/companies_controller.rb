@@ -78,7 +78,7 @@ class CompaniesController < ApplicationController
     respond_to do |format|
         format.html # /
         format.json { render json: @companies}
-        format.csv { render text: @companies.to_csv() }
+        format.csv { render text: Company.to_csv(@companies) }
         format.xlsx
     end
   end
@@ -117,7 +117,7 @@ class CompaniesController < ApplicationController
     @company.save
     redirect_to @company
   end
-  def Company.to_csv
+  def Company.to_csv(companies)
     CSV.generate do |csv|
       csv << column_names
       all.each do |company|
