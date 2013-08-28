@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130804192128) do
+ActiveRecord::Schema.define(:version => 20130828164634) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -69,6 +69,16 @@ ActiveRecord::Schema.define(:version => 20130804192128) do
 
   add_index "logs", ["company_id", "created_at"], :name => "index_logs_on_company_id_and_created_at"
   add_index "logs", ["user_id", "created_at"], :name => "index_logs_on_user_id_and_created_at"
+
+  create_table "mails", :force => true do |t|
+    t.string   "to"
+    t.string   "cc"
+    t.string   "bcc"
+    t.string   "subject"
+    t.string   "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "teams", :force => true do |t|
     t.string   "name"

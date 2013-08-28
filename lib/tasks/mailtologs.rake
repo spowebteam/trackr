@@ -4,7 +4,7 @@ namespace :logs do
   desc "Create Single User"
   task frommail: :environment do
     imap = Net::IMAP.new('newmailhost.cc.iitk.ac.in')
-    imap.authenticate('LOGIN', 'shubtri', 'mohancho')
+    imap.authenticate('LOGIN', '#####', '********')
     imap.select('INBOX.Sent')
     
     # count = 0
@@ -13,12 +13,15 @@ namespace :logs do
       start="1-#{months[i%12]}-#{2011+(i/12)}"
       stop="1-#{months[(i+1)%12]}-#{2011+((i+1)/12)}"
       puts "From : #{start}"
-      dir="/home/shubtri/Trackr"
-      f = File.new("#{dir}#{start}-SENT.csv","w")
-      f.write "Name,Email,Company,Subject,Date,Body\n"
+      #dir="/home/shubtri/Trackr"
+      #f = File.new("#{dir}#{start}-SENT.csv","w")
+      #f.write "Name,Email,Company,Subject,Date,Body\n"
       imap.search(["BEFORE", stop, "SINCE", start]).each do |message_id|
         envelope = imap.fetch(message_id, "ENVELOPE")[0].attr["ENVELOPE"]
         subject = envelope.subject
+        toid=""
+        ccid=""
+        bccid=""
         date=envelope.date
         body=imap.fetch(message_id, "BODY[TEXT]")[0].attr["BODY[TEXT]"]
         subject.sub!(',',' ') if subject
@@ -29,9 +32,11 @@ namespace :logs do
             domain = to.host
             probable_company=domain.split('.')[0] if domain
             name.sub!(',',' ') if name
-            f.write "#{name},#{email_id}@#{domain},#{probable_company},#{subject},#{date},#{body}\n".force_encoding('UTF-8')
+            toid=to.mailbox+"@"+domain+","+toid
+            #f.write "#{name},#{email_id}@#{domain},#{probable_company},#{subject},#{date},#{body}\n".force_encoding('UTF-8')
           end
         end
+        puts toid
         if envelope.cc 
           envelope.cc.each do |cc|
             name = cc.name
@@ -39,9 +44,11 @@ namespace :logs do
             domain = cc.host
             probable_company=domain.split('.')[0] if domain
             name.sub!(',',' ') if name
-            f.write "#{name},#{email_id}@#{domain},#{probable_company},#{subject},#{date},#{body}\n".force_encoding('UTF-8')
+            ccid=cc.mailbox+"@"+domain+","+ccid
+            #f.write "#{name},#{email_id}@#{domain},#{probable_company},#{subject},#{date},#{body}\n".force_encoding('UTF-8')
           end
         end
+        puts ccid
         if envelope.bcc 
           envelope.bcc.each do |bcc|
             name = bcc.name
@@ -49,9 +56,12 @@ namespace :logs do
             domain = bcc.host
             probable_company=domain.split('.')[0] if domain
             name.sub!(',',' ') if name
-            f.write "#{name},#{email_id}@#{domain},#{probable_company},#{subject},#{date},#{body}\n".force_encoding('UTF-8')
+            bccid=bcc.mailbox+"@"+domain+","+bccid
+            #f.write "#{name},#{email_id}@#{domain},#{probable_company},#{subject},#{date},#{body}\n".force_encoding('UTF-8')
           end
         end
+        puts bccid
+      Mail.create!(to:toid,cc:ccid,bcc:bccid,subject:subject,body:body)
       end
       puts "Till : #{stop}"
     end
