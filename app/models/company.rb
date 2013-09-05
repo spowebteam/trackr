@@ -73,8 +73,8 @@ class Company < ActiveRecord::Base
       "Test Completed"
     elsif code <= keys[:rejected]
       "Rejected Invitation"
-    elsif code <= keys[:novacany]
-      "No Vacany"
+    elsif code <= keys[:novacancy]
+      "No Vacancy"
     elsif code <= keys[:contactlater]
       "Contact Later"
     elsif code <= keys[:blacklisted]
@@ -98,7 +98,7 @@ class Company < ActiveRecord::Base
   validates :address, length: {minimum:0,maximum:1024}
   validates :location,length: {minimum:0,maximum:100}
   VALID_PHONE_REGEX = /\A\+?[0-9\-\s\(\)\/{ext:}]*\z/
-  validates :phone, format: {with: VALID_PHONE_REGEX, message: "Phone can be Numerals, (, ), / (For multiple numbers), Space , - , ext: (For extension). + symbol allowed at beggining"}
+  #validates :phone, format: {with: VALID_PHONE_REGEX, message: "Phone can be Numerals, (, ), / (For multiple numbers), Space , - , ext: (For extension). + symbol allowed at beggining"}
   VALID_URL_REGEX = /\A[[a-z\d\-.\/:]+\.[a-z]+]?\z/i
-  validates :url, format: {with: VALID_URL_REGEX}
+  #validates :url, format: {with: VALID_URL_REGEX}
 end
