@@ -5,7 +5,7 @@ server "172.31.76.192", :web, :app, :db, primary: true
 
 set :application, "trackr"
 set :user, "administrator"
-set :deploy_to, "/home/#{user}/apps/#{application}"
+set :deploy_to, "/home/#{user}/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
