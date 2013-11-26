@@ -11,7 +11,7 @@ set :use_sudo, false
 
 set :scm, "git"
 set :repository, "git@github.com:spowebteam/#{application}.git"
-set :branch, "production"
+set :branch, "testdeploy"
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
